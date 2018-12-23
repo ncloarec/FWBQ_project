@@ -1,4 +1,4 @@
-\documentclass[a4paper,twocolumn,10pt]{article}
+\documentclass[a4paper, 10pt]{article}
 \input{preambule.tex}
 \usepackage{mesMacros}
 
@@ -13,16 +13,15 @@
 
 \begin{document}
 
-\maketitle
+\input{inputs/title}
 
-\paragraph{Group members : }
-Lyn​ Boussengui, Antoine Browaeys, Achraf Bzili, Nicolas Cloarec
-
-\input{inputs/introduction}
+\begin{multicols*}{2}
+  \input{inputs/body}
 
 
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{bib_project}
+\end{multicols*}
 
 \end{document}
