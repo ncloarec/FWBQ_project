@@ -23,10 +23,10 @@ the conditional expectation of p[f] and also the conditional variance.
 - [Bayesian Quadrature for multiple integrals](https://arxiv.org/pdf/1801.04153.pdf?fbclid=IwAR3nJ63cmJQh0JO5luHYejIK0BWgd8WJqGiHe2lt7ILWjP46p0LJnDlRUWY):
 give also the same formulas
 
-# Frank Wolfe algorithm
+## Frank Wolfe algorithm
 - [Bach et al](https://arxiv.org/pdf/1203.4523.pdf?fbclid=IwAR3tVnsQrKCK_Tkb7WgRSKwQQuyg8ewNqCFTpzGTLFIv0EYs2a3JQAtOxCo)
 
-# Convergence rates
+## Convergence rates
 - [Bach presentation](http://probabilistic-numerics.org/assets/pdf/nips2015_probint/fbach_nips_2015_quadrature.pdf)
 
 ## Other links
