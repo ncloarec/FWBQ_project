@@ -11,6 +11,12 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 
+\usepackage{pifont} %add ding for item
+
+% color equation number
+\renewcommand\theequation{{\color{electriccrimson}\arabic{equation}}}
+
+
 %\AfterPreamble{
 \hypersetup{
  pdfauthor       = { },
@@ -110,7 +116,6 @@
 % offre plus de possibilités pour le coloriage des tableaux
 
 % pour ajuster l'espacement vertical et horizontal des tableaux
-\renewcommand{\arraystretch}{1.3} % amplification de l'espacement vertical (pas une longueur!)
 \setlength{\tabcolsep}{0.3cm} % espacement horizontal (inter-colonnes d'habituellement 6pt)
 
 %%%%%%%%%% mathématiques, unités SI %%%%%%%%%%
@@ -190,7 +195,6 @@
 \newcommand{\its}{\item[$\star$]}
 %\newcommand{\cad}{c'est-à-dire\xspace}
 \newcommand{\cad}{\textit{i.e.}\xspace}
-\newcommand{\e}{{\rm e}}
 
 %%%%%%%%%%
 

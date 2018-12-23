@@ -1,4 +1,46 @@
-\section{Introduction}
+\section*{Notations}
+We start with some notations we will use along this report.
+\begin{itemize}[font= \color{blue} \large, label= $\bullet$]
+ \item $p(\cdot)$ denotes the function $p: x \mapsto p(x)$.
+\end{itemize}
 
-The goal of this project ...*
+\section*{Introduction}
 
+The goal of this article \cite{FWBQ} is to compute efficiently the integrals of the form
+$ \displaystyle \int _ { \X } f ( x ) p ( x ) \mathrm { d } x$
+where $\X \subseteq \R ^ { d }$ is a measurable space,
+$d \geq 1$ integer representing the dimension of the problem, $p$ a probability
+density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
+ is a \textit{test}-function.
+
+ We will use the common approximation
+ \begin{equation}
+\int _ { \mathcal { X } } f ( x ) p ( x ) \mathrm { d } x \approx \sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right)
+ \end{equation}
+ but of course the real challenge lies in the choice of sequences $\acc{x_i}$ and
+ $\acc{w_i}$ :
+  \begin{itemize}[font= \color{blue} \large, label= $\bullet$]
+    \item \textbf{Monte Carlo}: $w_i = \frac{1}{n}$ and $x_i$ realization of multivariate
+    random variable $X_i \stackrel{iid}{\sim} X$ where $X$ has $p(\cdot)$ as probability
+    distribution.
+    \item \textbf{Kernel herding}:
+    \item \textbf{Quasi-Monte Carlo}:
+  \end{itemize}
+
+  In the \textbf{Frank-Wolfe Bayesian Quadrature}, we have
+  \begin{itemize}[font= \color{blue} \large, label= \ding{43}]
+\item $\acc{w_i}$ which appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ})
+\item $\acc{x_i}$ which are chosen to minimize the posterior variance of our estimator
+ (described in section \ref{sec:FW})
+  \end{itemize}
+
+  The main interest of the method developed in \cite{FWBQ} is the super fast
+  \textit{exponential} convergence to the true value compared to the other methods mentioned above. 
+
+
+
+\section{Bayesian Quadrature}
+\label{sec:BQ}
+
+\section{Frank-Wolfe algorithm}
+\label{sec:FW}

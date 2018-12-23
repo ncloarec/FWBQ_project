@@ -1,0 +1,571 @@
+% ==================================================
+% IfEmpty
+% ==================================================
+\newcommand{\ifempty}[3]{\ifx\hfuzz#1\hfuzz #2 \else #3\fi}
+% \hfuzz sert seulement à ne pas être présent dans #1
+% \ifstrempty : incompatible avec latexml
+% \ifblank : inactif
+% ==================================================
+% Ensembles de nombres
+% ==================================================
+\newcommand{\ensemblenombre}[1]{\mathbb{#1}}
+\newcommand{\N}{\ensemblenombre{N}}
+\newcommand{\gauss}[2]{\mathcal{N}\prt{#1, #2}}
+\newcommand{\A}{\mathcal{A}}
+% \newcommand{\C}{\mathcal{C}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Z}[1][]{\ifempty{#1}{\ensemblenombre{Z}}{\Z/#1\Z}}
+\newcommand{\Q}{\ensemblenombre{Q}}
+\newcommand{\R}{} % Probleme LateXML
+\renewcommand{\R}{\ensemblenombre{R}}
+\def\U{\ensemblenombre{U}} % U dans latexml
+% \def\C{\ensemblenombre{C}}
+\newcommand{\K}{\ensemblenombre{K}}
+\def\ind{{\bf 1}}
+
+% ==================================================
+% Stats
+% ==================================================
+\DeclareMathOperator*{\argmin}{arg\,min} % Jan Hlavacek
+\DeclareMathOperator*{\argmax}{arg\,max} % Jan Hlavacek
+\newcommand{\XX}{\transpose{X} \cdot X}
+\newcommand{\emc}{estimateur des moindres carrés }
+\newcommand{\topt}{\theta^{\star}} %estimateur moindre carres
+\newcommand{\tmc}{\hat{\theta}^{\text{\tiny MC}}} %estimateur moindre carres
+\newcommand{\tmcr}{\tmc \leftp \H \rightp} %estimateur moindre carres restreint
+\newcommand{\fmc}{\hat{f}^{\text{\tiny MC}}} %estimateur moindre carres
+\newcommand{\festim}{\hat{f}} %estimateur
+\newcommand{\testim}{\hat{\theta}} %estimateur
+\newcommand{\Aestim}{\hat{A}} %estimateur
+\newcommand{\lestim}{\hat{\lambda}} %estimateur
+\newcommand{\Aopt}{A^{\star}} %estimateur
+\renewcommand{\H}{\Uptheta} %ensemble des estimateurs
+\newcommand{\Var}{\mathrm{Var}} %variance
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\newcommand{\thickbar}[1]{\mathbf{\bar{\text{$#1$}}}}
+\newcommand{\thicktilde}[1]{\mathbf{\tilde{\text{$#1$}}}}
+\newcommand{\ftilde}{\mathbf{\tilde{\text{$f$}}}}
+\newcommand{\ttilde}{\mathbf{\tilde{\theta}}}
+\newcommand{\tbar}{\mathbf{\thickbar{\theta}}}
+\newcommand{\lbar}{\mathbf{\thickbar{\lambda}}}
+\newcommand{\ssg}{$\sigma$-\textit{SG} }
+\newcommand{\Proba}[1]{\mathbb{P} \prt{#1}}
+\newcommand{\Expec}[1]{\mathbb{E} \prt{#1}}
+\newcommand{\Jestim}{\hat{J}} %estimateur des indices des relevant variables
+\newcommand{\Jopt}{J^{\star}} %estimateur des indices des relevant variables
+\newcommand{\spm}{\raisebox{.2ex}{$\scriptstyle\pm$}} % plus or minus
+% ==================================================
+% Opérations
+% ==================================================
+\let\oldstar=\star
+\def\star{\mathbin{\oldstar}}
+\newcommand*\divise{\mathrel{\mid}}
+\renewcommand{\bigoplus}{\mathop{\hbox{\large $\oplus$}}}
+\newcommand*{\Bigoplus}{\mathop{\hbox{\Large $\oplus$}}}
+\newcommand*\obot{\mathbin{\oplus^{\bot}}}
+\newcommand*\bigobot{\mathop{\hbox{\large$\oplus\smash{\mathrlap{^{\bot}}}$}}} % Une faute d'espacement à la suite...
+\def\.{}
+\def\loiproduit{.}
+\newcommand{\nfrac}[2]{#1/#2}
+\let\lleq\ll
+% ==================================================
+% Opérateurs
+% ==================================================
+\newcommand{\raisebot}{\raisebox{1pt}{$\scriptstyle\bot$}}
+\newcommand{\factorial}[1]{#1!\,}
+% ==================================================
+% Raccourcis d'éditions
+% ==================================================
+\newcommand{\dotpourvariable}{\:\cdot\:}
+% \newcommand{\X}{\mathopen{[}X\mathclose{]}}
+\newcommand{\Cte}{C^{te}}
+% ==================================================
+% Lettres remarquables
+% ==================================================
+\def\L{\mathop{}\mathopen{}\mathrm{L}}
+\def\D{\mathop{}\mathopen{}\mathrm{D}}
+\renewcommand{\d}{\mathop{}\mathopen{}\mathrm{d}}
+\def\dx{\d{}x}
+\def\ds{\d{}s}
+\def\dt{\d{}t}
+\def\du{\d{}u}
+\newcommand*{\e}{\ensuremath{\mathrm{e}}}
+\def\o{\mathrm{o}}
+\def\O{\mathrm{O}}
+\renewcommand*{\i}{\ensuremath{\mathrm{i}}}
+\newcommand*{\I}{\ensuremath{\mathrm{I}}}
+\newcommand*{\Id}{\ensuremath{\mathrm{Id}}}
+\newcommand*{\E}{\ensuremath{\mathrm{E}}}
+\newcommand*{\V}{\ensuremath{\mathrm{V}}}
+\def\P{\ensuremath{\mathrm{P}}}
+% ==================================================
+% Matrices
+% ==================================================
+\newcommand{\cycle}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\colonne}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\coord}[1]{\left|\begin{matrix}#1\end{matrix}\right.}
+\newcommand{\ligne}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\bloc}[3]{\smash{\mathclap{\raisebox{#2}{\hspace{#1}\large$(#3)$}}}}
+\newcommand{\blocsup}[1]{\bloc{-8pt}{-4pt}{#1}}
+\newcommand{\blocinf}[1]{\bloc{10pt}{3pt}{#1}}
+\newcommand{\dettaille}[1]{\mathrlap{[#1]}}
+\newcommand{\transpose}[1]{\ensuremath{#1^{\scriptscriptstyle T}}}
+
+
+% ==================================================
+% Outils mathématiques divers
+% ==================================================
+
+\renewcommand{\pmod}[1]{\;\mathopen{}\left[#1\mathclose{}\right]}
+\newcommand{\restrict}{\mathclose{}|\mathopen{}}
+\newcommand{\eval}[2]{\left.#1\mathclose{}\right|_{#2}}
+\newcommand{\eqdef}{\overset{\text{d\'ef}}{=}}
+\renewcommand{\=}{\mathop{=} \limits}
+\newcommand{\lsim}{\mathop{\sim} \limits}
+\newcommand{\lto}[1]{\xrightarrow[#1]{}}
+% \newcommand{\lto}[1]{\underset{#1}{\longrightarrow}}
+
+% ==================================================
+% Événements probabilités
+% ==================================================
+\newcommand*{\evt}[1]{(#1)}
+\newcommand*{\bigevt}[1]{\bigl(#1\bigr)}
+\newcommand*{\evtval}[1]{`#1'}
+\newcommand*{\evttext}[1]{\hbox{\og{}#1\fg{}}}
+\newcommand*{\PC}[2]{\P(#1 \!\mid\! #2)}
+\newcommand*{\bigPC}[2]{\P\bigl(#1 \!\mid\! #2\bigr)}
+\newcommand*{\BigPC}[2]{\P\Bigl(#1 \!\mid\! #2\Bigr)}
+
+
+% ==================================================
+% Outils de mise en forme
+% ==================================================
+\def\_#1{\mathcal{#1}}
+\newcommand{\novskip}{\vspace{-\baselineskip}}
+\newcommand{\baisse}[1]{\rule[-#1pt]{0pt}{#1pt}}
+
+
+% ==================================================
+% Articulation du discours
+% ==================================================
+\newcommand{\sensdirect}{\par\smallbreak\mbox{$(\implies)$}\xspace}
+\newcommand{\sensindirect}{\par\smallbreak\mbox{$(\impliedby)$}\xspace}
+\newcommand{\implication}[2]{\par\smallbreak\mbox{(\romannumeral#1)$\implies$(\romannumeral#2)}}
+\newcommand\analyse{\mbox{\sl Analyse:}\xspace}
+\newcommand\synthese{\mbox{\sl Synthèse:}\xspace}
+\newcommand\existence{\mbox{\sl Existence:}\xspace}
+\newcommand\unicite{\mbox{\sl Unicité:}\xspace}
+\newcommand\cas[1]{\mbox{{\sl Cas:}\xspace #1.}\xspace}
+\newcommand\casgeneral{\mbox{\sl Cas général:}\xspace}
+\newcommand{\Python}{\textbf{Python}}
+% ==================================================
+% Locutions latines
+% ==================================================
+\def\afortiori{\textsl{a fortiori}\xspace}
+\def\Afortiori{\textsl{A fortiori}\xspace}
+\def\aposteriori{\textsl{a posteriori}\xspace}
+\def\Aposteriori{\textsl{A posteriori}\xspace}
+\def\apriori{\textsl{a priori}\xspace}
+\def\Apriori{\textsl{A priori}\xspace}
+\def\adhoc{\textsl{ad~hoc}\xspace}
+\def\mutatis{\textsl{mutatis mutandis}\xspace}
+\def\Mutatis{\textsl{Mutatis mutandis}\xspace}
+\def\ie{\textsl{i.e.}\xspace}
+\def\cad{c'est-à-dire\xspace}
+% ==================================================
+% Bavardages dans les équations
+% ==================================================
+\def\et{\text{~et~}}
+\def\ou{\text{~ou~}}
+\def\quadet{\quad\text{et}\quad}
+\def\quadou{\quad\text{ou}\quad}
+\def\pour{\text{~pour~}}
+\def\quadpour{\text{\quad pour\quad}}
+\def\car{\text{~car~}}
+\def\quadcar{\text{\quad car\quad}}
+\def\avec{\text{~avec~}}
+\def\quadavec{\text{\quad avec\quad}}
+\def\donc{\text{~donc~}}
+\def\quaddonc{\text{\quad donc\quad}}
+\def\sur{\text{~sur~}}
+\def\quadsur{\text{\quad sur~}}
+\def\quadpuis{\text{\quad puis\quad}}
+\def\si{\text{~si~}}
+\def\sinon{\text{~sinon}}
+\def\CVS{\text{CVS}}
+\def\CVU{\text{CVU}}
+\def\CV{\text{CV}}
+\def\pt{\text{.}}
+\def\qspace{,\quad}
+\newcommand\nopt[1]{}
+\def\mathog{\ensuremath{\text{\guillemotleft\,}}}
+\def\mathfg{\ensuremath{\text{\,\guillemotright}}}
+
+
+% ==================================================
+% Parenthèses
+% ==================================================
+\makeatletter
+\let\bBigg@@\bBigg@
+\renewcommand{\bBigg@}[2]{{%
+   \mathchoice
+   {\bBigg@@{#1}{#2}}% Displaysize
+   {\bBigg@@{#1}{#2}}% Textesize
+   {\big@size=.7\big@size\bBigg@@{#1}{#2}}% Scriptsize
+   {\big@size=.5\big@size\bBigg@@{#1}{#2}}}}% Subscriptsize
+\def\biggg{\bBigg@{3}}
+\def\bigggl{\mathopen{}\biggg}
+\def\bigggr{\mathclose{}\biggg}
+\def\Biggg{\bBigg@{3.5}}
+\def\Bigggl{\mathopen{}\Biggg}
+\def\Bigggr{\mathclose{}\Biggg}
+\makeatother
+
+\newcommand{\leftp}{\left(}
+\newcommand{\rightp}{\right)}
+\newcommand{\prt}[1]{\left( \, #1  \, \right)}
+\newcommand{\acc}[1]{\left \{ \, #1 \, \right \}}
+% ==================================================
+% Valeur abslue
+% ==================================================
+\newcommand{\abs}[1]{\left\lvert\ifempty{#1}{\dotpourvariable}{#1}\right\rvert}
+\newcommand{\bigabs}[1]{\bigl\lvert#1\bigr\rvert}
+\newcommand{\Bigabs}[1]{\Bigl\lvert#1\Bigr\rvert}
+\newcommand{\biggabs}[1]{\biggl\lvert#1\biggr\rvert}
+\newcommand{\Biggabs}[1]{\Biggl\lvert#1\Biggr\rvert}
+% ==================================================
+% Norme minkowski
+% ==================================================
+\newcommand{\norm}[1]{\left|\ifempty{#1}{\dotpourvariable}{#1}\right|}
+\newcommand{\bignorm}[1]{\bigl|#1\bigr|}
+\newcommand{\Bignorm}[1]{\Bigl|#1\Bigr|}
+\newcommand{\biggnorm}[1]{\biggl|#1\biggr|}
+\newcommand{\Biggnorm}[1]{\Biggl|#1\Biggr|}
+
+% ==================================================
+% Norme empirique
+% ==================================================
+\newcommand{\norme}[1]{\left\lVert\ifempty{#1}{\dotpourvariable}{#1}\right\rVert}
+\newcommand{\bignorme}[1]{\bigl\lVert#1\bigr\rVert}
+\newcommand{\Bignorme}[1]{\Bigl\lVert#1\Bigr\rVert}
+\newcommand{\biggnorme}[1]{\biggl\lVert#1\biggr\rVert}
+\newcommand{\Biggnorme}[1]{\Biggl\lVert#1\Biggr\rVert}
+% ==================================================
+% Produit scalaire
+% ==================================================
+\newcommand{\ps}[2]{\mathopen(\ifempty{#1}{\dotpourvariable}{#1}\!\mid\!\ifempty{#2}{\dotpourvariable}{#2}\mathclose)}
+\newcommand{\bigps}[2]{\bigl( #1 \!\mid\! #2 \bigr)}
+\newcommand{\Bigps}[2]{\Bigl( #1 \!\mid\! #2 \Bigr)}
+\newcommand{\biggps}[2]{\biggl( #1 \!\mid\! #2 \biggr)}
+\newcommand{\Biggps}[2]{\Bigl( #1 \!\mid\! #2 \Biggr)}
+% ==================================================
+% Produit scalaire crochet
+% ==================================================
+\newcommand{\psc}[2]{\mathopen\langle \ifempty{#1}{\dotpourvariable}{#1},\ifempty{#2}{\dotpourvariable}{#2}\mathclose\rangle}
+\newcommand{\bigpsc}[2]{\bigl\langle #1,#2 \bigr\rangle}
+\newcommand{\Bigpsc}[2]{\Bigl\langle #1,#2 \Bigr\rangle}
+\newcommand{\biggpsc}[2]{\biggl\langle #1,#2 \biggr\rangle}
+\newcommand{\Biggpsc}[2]{\Biggl\langle #1,#2 \Biggr\rangle}
+% ==================================================
+% Norme triple
+% ==================================================
+\newcommand{\normetriple}[1]{\lvert\hspace{-0.1em}\lvert\hspace{-0.1em}\lvert\ifempty{#1}{\dotpourvariable}{#1}\rvert\hspace{-0.1em}\rvert\hspace{-0.1em}\rvert}
+\newcommand{\bignormetriple}[1]{\bigl\lvert\hspace{-0.1em}\bigl\lvert\hspace{-0.1em}\bigl\lvert#1\bigr\rvert\hspace{-0.1em}\bigr\rvert\hspace{-0.1em}\bigr\rvert}
+% ==================================================
+% Ensemble
+% ==================================================
+\newcommand{\tq}{\space\mid\space}
+\newcommand{\set}[1]{\def\tq{\:\lvert\:}\left\{#1\right\}}
+\newcommand{\bigset}[1]{\def\tq{\:\big\lvert\:}\bigl\{#1\bigr\}}
+\newcommand{\Bigset}[1]{\def\tq{\:\Big\lvert\:}\Bigl\{#1\Bigr\}}
+\newcommand{\biggset}[1]{\def\tq{\:\Big\lvert\:}\biggl\{#1\biggr\}}
+\newcommand{\Biggset}[1]{\def\tq{\:\Big\lvert\:}\Biggl\{#1\Biggr\}}
+\newcommand{\hugeset}[1]{\def\tq{\:\Big\lvert\:}\left\{#1\right\}}
+% ==================================================
+% Partie entière
+% ==================================================
+\newcommand{\floor}[1]{\left\lfloor\ifempty{#1}{\dotpourvariable}{#1}\right\rfloor}
+\newcommand{\bigfloor}[1]{\bigl\lfloor #1 \bigr\rfloor}
+\newcommand{\Bigfloor}[1]{\Bigl\lfloor #1 \Bigr\rfloor}
+\newcommand{\biggfloor}[1]{\biggl\lfloor #1 \biggr\rfloor}
+\newcommand{\Biggfloor}[1]{\Biggl\lfloor #1 \Biggr\rfloor}
+% ==================================================
+% Partie supérieure
+% ==================================================
+\newcommand{\ceil}[1]{\left\lceil\ifempty{#1}{\dotpourvariable}{#1}\right\rceil}
+% ==================================================
+% Angle orienté
+% ==================================================
+\renewcommand{\angle}[2]{\bigl(#1;#2\bigr)}
+% ==================================================
+% Intervalles
+% ==================================================
+\newcommand{\intervalle}[4]{\mathopen{#1}#2\mathpunct{};#3\mathclose{#4}}
+\newcommand{\intff}[2]{\intervalle{[}{#1}{#2}{]}}
+\newcommand{\intof}[2]{\intervalle{]}{#1}{#2}{]}}
+\newcommand{\intfo}[2]{\intervalle{[}{#1}{#2}{[}}
+\newcommand{\intoo}[2]{\intervalle{]}{#1}{#2}{[}}
+\newcommand{\intn}[2]{\intervalle{\llbracket}{#1}{#2}{\rrbracket}}
+\newcommand{\bigintervalle}[4]{\bigl{#1}#2\mathpunct{};#3\bigr{#4}}
+\newcommand{\bigintff}[2]{\bigintervalle{[}{#1}{#2}{]}}
+\newcommand{\bigintof}[2]{\bigintervalle{]}{#1}{#2}{]}}
+\newcommand{\bigintfo}[2]{\bigintervalle{[}{#1}{#2}{[}}
+\newcommand{\bigintoo}[2]{\bigintervalle{]}{#1}{#2}{[}}
+\newcommand{\bigintn}[2]{\bigintervalle{\llbracket}{#1}{#2}{\rrbracket}}
+\newcommand{\Bigintervalle}[4]{\Bigl{#1}#2\mathpunct{};#3\Bigr{#4}}
+\newcommand{\Bigintff}[2]{\Bigintervalle{[}{#1}{#2}{]}}
+\newcommand{\Bigintof}[2]{\Bigintervalle{]}{#1}{#2}{]}}
+\newcommand{\Bigintfo}[2]{\Bigintervalle{[}{#1}{#2}{[}}
+\newcommand{\Bigintoo}[2]{\Bigintervalle{]}{#1}{#2}{[}}
+\newcommand{\Bigintn}[2]{\Bigintervalle{\llbracket}{#1}{#2}{\rrbracket}}
+\newcommand{\biggintervalle}[4]{\biggl{#1}#2\mathpunct{};#3\biggr{#4}}
+\newcommand{\biggintff}[2]{\biggintervalle{[}{#1}{#2}{]}}
+\newcommand{\biggintof}[2]{\biggintervalle{]}{#1}{#2}{]}}
+\newcommand{\biggintfo}[2]{\biggintervalle{[}{#1}{#2}{[}}
+\newcommand{\biggintoo}[2]{\biggintervalle{]}{#1}{#2}{[}}
+\newcommand{\biggintn}[2]{\biggintervalle{\llbracket}{#1}{#2}{\rrbracket}}
+\newcommand{\Biggintervalle}[4]{\Biggl{#1}#2\mathpunct{};#3\Biggr{#4}}
+\newcommand{\Biggintff}[2]{\Biggintervalle{[}{#1}{#2}{]}}
+\newcommand{\Biggintof}[2]{\Biggintervalle{]}{#1}{#2}{]}}
+\newcommand{\Biggintfo}[2]{\Biggintervalle{[}{#1}{#2}{[}}
+\newcommand{\Biggintoo}[2]{\Biggintervalle{]}{#1}{#2}{[}}
+\newcommand{\Biggintn}[2]{\Biggintervalle{\llbracket}{#1}{#2}{\rrbracket}}
+% Variations
+\newcommand{\var}[1]{\mathop{}\left[\rule{0pt}{12pt} #1 \mathclose{}\right]}
+
+
+
+
+% ==================================================================
+% Introduction d'un espace supplémentaire devant certains opérateurs
+% ==================================================================
+% \let\oldBiggl=\Biggl
+% \def\Biggl#1#2{\oldBiggl#1%
+% \ifthenelse{\equal{\unexpanded{#2}}{\unexpanded{\sum}}}{\,}{}%
+% \ifthenelse{\equal{\unexpanded{#2}}{\unexpanded{\prod}}}{\,}{}%
+% \ifthenelse{\equal{\unexpanded{#2}}{\unexpanded{\bigcup}}}{\,}{}%
+% \ifthenelse{\equal{\unexpanded{#2}}{\unexpanded{\bigcap}}}{\,}{}%
+% #2}
+
+% ==================================================
+% Opérateurs remarquables
+% ==================================================
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\GO}{\O}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Ent}{Ent}
+\DeclareMathOperator{\Aire}{Aire}
+\DeclareMathOperator{\Vect}{Vect}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Rot}{Rot}
+\DeclareMathOperator{\grad}{\nabla\!}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\Adh}{Adh}
+\DeclareMathOperator{\Com}{Com}
+\DeclareMathOperator{\com}{Com}
+\DeclareMathOperator{\Card}{Card}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\cor}{cor}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\sgn}{signe}
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\argsh}{argsh}
+\DeclareMathOperator{\argch}{argch}
+\DeclareMathOperator{\argth}{argth}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\PGCD}{PGCD}
+\DeclareMathOperator{\PPCM}{PPCM}
+\DeclareMathOperator{\pgcd}{pgcd}
+\DeclareMathOperator{\ppcm}{ppcm}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\non}{non}
+\DeclareMathOperator{\Det}{Det}
+% \DeclareMathOperator{\Cl}{Cl}
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\th{\operatorname{th}}
+\renewcommand\Im{\operatorname{Im}}
+\renewcommand\det{\operatorname{det}}
+\renewcommand\ker{\operatorname{Ker}}
+
+% ==================================================
+% Macros "complexes"
+% ==================================================
+% Calcul la différence d'espace entre deux boîtes
+\newlength{\mydeltalength}
+\newcommand{\deltaspace}[2]{%
+ \setbox1=\hbox{#1}\setbox2=\hbox{#2}%
+ \setlength{\mydeltalength}{\wd1}\addtolength{\mydeltalength}{-\wd2}%
+ \hspace{\mydeltalength}}
+
+% ==================================================
+% Colors
+% ==================================================
+\RequirePackage{xcolor}
+\definecolor{ggyellow}{RGB}{255,185,88}
+\definecolor{ggred}{RGB}{219,68,55}
+\definecolor{ggblue}{RGB}{66,133,244}
+\definecolor{ggyellow}{RGB}{244,160,0}
+\definecolor{gggreen}{RGB}{15,157,88}
+\definecolor{darkgreen}{RGB}{0,100,0}
+\definecolor{myorange}{RGB}{255, 145, 0}
+\definecolor{mygreen}{RGB}{64, 128, 0}
+\definecolor{mybrown}{RGB}{128, 64, 0}
+\definecolor{mypurple}{RGB}{128, 0, 128}
+\definecolor{electriccrimson}{rgb}{1.0, 0.0, 0.25}
+
+% ==================================================
+% Fioritures
+% ==================================================
+
+\RequirePackage[object=vectorian]{pgfornament}
+\usetikzlibrary{shapes.geometric,calc}
+\RequirePackage{psvectorian,auto-pst-pdf}
+\RequirePackage{tikz}
+\renewcommand*{\psvectorianDefaultColor}{NavyBlue}%
+\tikzset{pgfornamentstyle/.style={draw=NavyBlue, fill = blue}}
+
+\newcommand{\fancyline}{%
+ \noindent
+ \begin{center}
+  {\color{DarkViolet}
+   \resizebox{0.5\linewidth}{1ex}
+   {{%
+      {\begin{tikzpicture}
+         \node  (C) at (0,0) {};
+         \node (D) at (9,0) {};
+         \path (C) to [ornament=85] (D);
+        \end{tikzpicture}}}}}%
+ \end{center}
+}
+
+\newcommand{\fiorbird}{
+ ~\bigskip
+ ~\medskip
+ ~\begin{center}
+  \rput(0,0pt){\psvectorian[scale=1.5]{190}}
+ \end{center}
+ \vspace{1cm}
+}
+
+\newcommand{\fiordove}{
+ ~\bigskip
+ ~\medskip
+ ~\begin{center}
+  \rput(0,0pt){\psvectorian[scale=1.5]{113}}
+ \end{center}
+ \vspace{1cm}
+}
+
+\newcommand{\fiorboat}{
+ ~\bigskip
+ ~\medskip
+ ~\begin{center}
+  \rput(0,0pt){\psvectorian[scale=1.5]{127}}
+ \end{center}
+ \vspace{1cm}
+}
+
+\newcommand{\fiorlyre}{
+ ~\bigskip
+ ~\medskip
+ ~\begin{center}
+  \rput(0,0pt){\psvectorian[scale=1.5]{173}}
+ \end{center}
+ \vspace{1cm}
+}
+
+\newcommand{\fiorlion}{
+ ~\bigskip
+ ~\medskip
+ ~\begin{center}
+  \rput(0,0pt){\psvectorian[scale=1.5]{158}}
+ \end{center}
+ \vspace{1cm}
+}
+
+% ==================================================
+% Environnements
+% ==================================================
+\newenvironment{enumi}{\begin{enumerate}[label=(\roman*)\space]}{\end{enumerate}}
+\newenvironment{enum1}{\begin{enumerate}[label=\arabic*)\space]}{\end{enumerate}}
+\newenvironment{enuma}{\begin{enumerate}[label=\alph*)\space]}{\end{enumerate}}
+\newenvironment{application}{\left\{ \begin{array}{@{\,}r@{\;}c@{\;}l@{\,}}}{\end{array}\right.}
+\newenvironment{systeme}[1][]
+{\left\lbrace
+\ifempty{#1}{\begin{array}{@{}r*{20}{@{}>{\strut}l<{\strut}}}}{\begin{array}{#1}}}
+ {\end{array}\right.}
+%%%%%%%% ENVIRONNEMENT EXERCICES %%%%%%%%%%
+
+\makeatletter
+\newcounter{exo}[subsection]
+\newenvironment{exo}[1][]
+{
+
+ \fancyline
+
+ \edef\@exer{#1}%
+ \ifx\@exer\empty{}\else{\setcounter{exo}{#1}\addtocounter{exo}{-1}}\fi%
+ \refstepcounter{exo}%
+ \noindent { \textcolor{NavyBlue}{\fontfamily{pzc}\selectfont \large {\LARGE\textsc{E}}xercice \theexo.}}%
+ \hspace{0.5em}}
+{\medskip}
+
+%%%%%%%% ENVIRONNEMENT QUESTIONS %%%%%%%%%%
+
+\makeatletter
+\newcounter{qst}[subsection]
+\newenvironment{qst}[1][]
+{
+
+ \fancyline
+
+
+ \edef\@qst{#1}%
+ \ifx\@qst\empty{}\else{\setcounter{qst}{#1}\addtocounter{qst}{-1}}\fi%
+ \refstepcounter{qst}%
+ \noindent { \textcolor{myorange}{\fontfamily{pzc}\selectfont \large {\LARGE\textsc{Q}}uestion \theqst.}}%
+ \hspace{0.5em}}
+{\medskip}
+
+%%%%%%%% ENVIRONNEMENT REPONSES %%%%%%%%%%
+
+\makeatletter
+\newcounter{rep}[subsection]
+\newenvironment{rep}[1][]
+{
+
+ \fancyline
+
+
+ \edef\@rep{#1}%
+ \ifx\@rep\empty{}\else{\setcounter{rep}{#1}\addtocounter{rep}{-1}}\fi%
+ \refstepcounter{rep}%
+ \noindent { \textcolor{mypurple}{\fontfamily{pzc}\selectfont \large {\LARGE\textsc{R}}éponse \therep.}}%
+ \hspace{0.5em}}
+{\medskip}
+
+
+%%%%%%%% ENVIRONNEMENT SOLUTIONS %%%%%%%%%%
+
+\makeatletter
+\newcounter{sol}[subsection]
+\newenvironment{sol}[1][]
+{
+
+ \fancyline
+
+ \edef\@sol{#1}%
+ \ifx\@sol\empty{}\else{\setcounter{sol}{#1}\addtocounter{sol}{-1}}\fi%
+ \refstepcounter{sol}%
+ \noindent { \textcolor{Red}{\fontfamily{pzc}\selectfont \large {\LARGE\textsc{S}}olution \thesol.}}%
+ \hspace{0.5em}}
+{\medskip}

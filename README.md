@@ -26,7 +26,11 @@ give also the same formulas
 # Frank Wolfe algorithm
 - [Bach et al](https://arxiv.org/pdf/1203.4523.pdf?fbclid=IwAR3tVnsQrKCK_Tkb7WgRSKwQQuyg8ewNqCFTpzGTLFIv0EYs2a3JQAtOxCo)
 
+# Convergence rates
+- [Bach presentation](http://probabilistic-numerics.org/assets/pdf/nips2015_probint/fbach_nips_2015_quadrature.pdf)
+
 ## Other links
 
 * [Riesz representation theorem](https://en.wikipedia.org/wiki/Riesz_representation_theorem)
+
 * [Code example](https://github.com/jcockayne/ProbNumPy?fbclid=IwAR1QE6jT4sAXiczhatB4q7q_dK5cQiYZu6BY95pW8PMbqYdHdCik2uyXBwI)
