@@ -29,13 +29,12 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 
   In the \textbf{Frank-Wolfe Bayesian Quadrature}, we have
   \begin{itemize}[font= \color{blue} \large, label= \ding{43}]
-\item $\acc{w_i}$ which appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ})
-\item $\acc{x_i}$ which are chosen to minimize the posterior variance of our estimator
- (described in section \ref{sec:FW})
+\item $\acc{w_i}$ which appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ}),
+\item $\acc{x_i}$ selected by the Frank-Wolfe algorithm in order to minimize a posterior variance (described in section \ref{sec:FW}).
   \end{itemize}
 
   The main interest of the method developed in \cite{FWBQ} is the super fast
-  \textit{exponential} convergence to the true value compared to the other methods mentioned above.
+  \textit{exponential} convergence to the true value of the integral compared to the other methods mentioned above.
   % use Bach presentation for convergence rates benchmark
 
 \section{Theoretical framework}
