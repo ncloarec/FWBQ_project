@@ -15,7 +15,7 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 
  We will use the common approximation
  \begin{equation}
-\int _ { \mathcal { X } } f ( x ) p ( x ) \mathrm { d } x \approx \sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right)
+\int _ { \X } f ( x ) p ( x ) \d x \approx \sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right)
  \end{equation}
  but of course the real challenge lies in the choice of sequences $\acc{x_i}$ and
  $\acc{w_i}$ :
@@ -54,21 +54,24 @@ that $p = \frac{\d \mu}{ \d \lambda}$ where $\lambda$ denotes the Lebesgue measu
  the inner product and norm induced on $\H$.
 
  Recall that the following propositions hold:
- \begin{align}
-\forall x \in \mathcal { X } , \quad &k ( \cdot , x ) \in \mathcal { H }\\
-\forall x \in \mathcal { X } , \forall f \in \mathcal { H } , \quad &\langle f , k ( \cdot , x ) \rangle _ { \mathcal { H } } = f ( x )\\
-\forall (x,y) \in \mathcal { X }^2 \quad &k(x,y) = \inner{\Phi(x)}{\Phi(y)}_{\H}
-\end{align}
+ \begin{propriete}
+   \begin{align}
+  \forall x \in \X , \quad &k ( \cdot , x ) \in \H\\
+  \forall x \in \X , \forall f \in \H , \quad &\langle f , k ( \cdot , x ) \rangle _ { \H } = f ( x )\\
+  \forall (x,y) \in \X^2 \quad &k(x,y) = \inner{\Phi(x)}{\Phi(y)}_{\H}
+  \end{align}
+\end{propriete}
+
 
 Let's denote as \cite{FWBQ}
 \begin{align*}
-  p[f] &:= \int _ { \mathcal { X } } f ( x ) p ( x ) \mathrm { d } x\\
+  p[f] &:= \int _ { \X } f ( x ) p ( x ) \mathrm { d } x\\
   \p[f]&:=\sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right).
 \end{align*}
 
 We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to measure
  the accuracy of the approximation $p[f] \approx \p[f]$ in the worst case scenario and which is defined as
- $$\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right) : = \sup _ { f \in \mathcal { H } : \left[ f \left\| _ { \H } = 1 \right. \right. } | p [ f ] - \hat { p } [ f ] |.$$
+ $$\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right) : = \sup _ { f \in \H : \left[ f \left\| _ { \H } = 1 \right. \right. } | p [ f ] - \hat { p } [ f ] |.$$
 
 % montrer que p et $\p$ sont continues
 % théorème de Riesz
