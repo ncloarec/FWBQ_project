@@ -15,6 +15,7 @@ very useful to describe how to build a RKHS, and to give intuition and proof of
  * [Arthur Gretton](http://www.gatsby.ucl.ac.uk/~gretton/coursefiles/lecture4_introToRKHS.pdf?fbclid=IwAR3IkzOm-156s-IKu4oX_oZrjmLAA2FQLcW1-XQlTOQBxg_lQyUKUpMLFFE): give some information about the construction of RKHS for
  given kernel like the gaussian one. Give also the answer of the inclusion of the
  mapping (phi(x) for all x in X) in the feature space H (RKHS).
+ * [What makes the reproducing kernel Hilbert spaces point of view useful in machine learning?](https://www.quora.com/What-makes-the-reproducing-kernel-Hilbert-spaces-point-of-view-useful-in-machine-learning)
 
 ## Gaussian process and conditional gaussian rule
 - [Regression](http://www.gaussianprocess.org/gpml/chapters/RW2.pdf?fbclid=IwAR0n58_3Ld3d86dHy4zZvxFUm5WzPFR0XEC-5gx0PDZKioL3jTDBWQAZ2iM):

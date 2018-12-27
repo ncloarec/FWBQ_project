@@ -14,6 +14,7 @@
 \newcommand{\A}{\mathcal{A}}
 % \newcommand{\C}{\mathcal{C}}
 \newcommand{\X}{\mathcal{X}}
+\renewcommand{\H}{\mathcal{H}}
 \newcommand{\Z}[1][]{\ifempty{#1}{\ensemblenombre{Z}}{\Z/#1\Z}}
 \newcommand{\Q}{\ensemblenombre{Q}}
 \newcommand{\R}{} % Probleme LateXML
@@ -37,9 +38,10 @@
 \newcommand{\festim}{\hat{f}} %estimateur
 \newcommand{\testim}{\hat{\theta}} %estimateur
 \newcommand{\Aestim}{\hat{A}} %estimateur
+\newcommand{\p}{\hat{p}} %estimateur
 \newcommand{\lestim}{\hat{\lambda}} %estimateur
 \newcommand{\Aopt}{A^{\star}} %estimateur
-\renewcommand{\H}{\Uptheta} %ensemble des estimateurs
+% \renewcommand{\H}{\Uptheta} %ensemble des estimateurs
 \newcommand{\Var}{\mathrm{Var}} %variance
 \newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
 \newcommand{\thickbar}[1]{\mathbf{\bar{\text{$#1$}}}}
@@ -54,6 +56,7 @@
 \newcommand{\Jestim}{\hat{J}} %estimateur des indices des relevant variables
 \newcommand{\Jopt}{J^{\star}} %estimateur des indices des relevant variables
 \newcommand{\spm}{\raisebox{.2ex}{$\scriptstyle\pm$}} % plus or minus
+
 % ==================================================
 % Opérations
 % ==================================================
@@ -253,6 +256,7 @@
 % ==================================================
 % Produit scalaire
 % ==================================================
+\newcommand\inner[2]{\langle #1, #2 \rangle}
 \newcommand{\ps}[2]{\mathopen(\ifempty{#1}{\dotpourvariable}{#1}\!\mid\!\ifempty{#2}{\dotpourvariable}{#2}\mathclose)}
 \newcommand{\bigps}[2]{\bigl( #1 \!\mid\! #2 \bigr)}
 \newcommand{\Bigps}[2]{\Bigl( #1 \!\mid\! #2 \Bigr)}
