@@ -13,7 +13,7 @@
 % See tstextbook.tex for an example of how to use this class.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tstextbook}[2017/02/19 Free LaTeX text book template from Typesetters.se]
+\ProvidesClass{beautiful_article}[2017/02/19 Free LaTeX text book template from Typesetters.se]
 \LoadClass[11pt,onecolumn,titlepage,twoside,openany]{book}
 
 % Creative Common License
@@ -246,38 +246,50 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 % Boxes for theorems
 %--------------------------------------------------------------------------
 \newenvironment{boxtheorem}
-{\begin{tcolorbox}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=black!5,colframe=tsorange]}
 {\end{tcolorbox}}
 
 \newenvironment{boxdefinition}
-{\begin{tcolorbox}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=yellow!10!white,boxrule=0pt,frame hidden,
  borderline west={1.5mm}{-2mm}{tsforestgreen}]}
 {\end{tcolorbox}}
 
 \newenvironment{boxexercise}
-{\begin{tcolorbox}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=tsyellow!20,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
 \newenvironment{boxproblem}
-{\begin{tcolorbox}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=tsorange!25,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
 \newenvironment{boxprogramming}
-{\begin{tcolorbox}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=tsblue!10,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
 \newenvironment{boxexample}
-{\begin{tcolorbox}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=tsgrey!20,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}

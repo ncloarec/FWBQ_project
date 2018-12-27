@@ -6,7 +6,7 @@ We start with some notations we will use along this report.
 
 \section*{Introduction}
 
-The goal of the article \cite{FWBQ} is to compute efficiently the integrals of the form
+The goal of the article \citet{FWBQ} is to compute efficiently the integrals of the form
 $ \displaystyle \int _ { \X } f ( x ) p ( x ) \mathrm { d } x$
 where $\X \subseteq \R ^ { d }$ is a measurable space,
 $d \geq 1$ integer representing the dimension of the problem, $p$ a probability
@@ -14,9 +14,12 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
  is a \textit{test}-function.
 
  We will use the common approximation
- \begin{equation}
-\int _ { \X } f ( x ) p ( x ) \d x \approx \sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right)
- \end{equation}
+ \begin{boxproblem}
+   \begin{equation}
+  \int _ { \X } f ( x ) p ( x ) \d x \approx \sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right)
+   \end{equation}
+ \end{boxproblem}
+
  but of course the real challenge lies in the choice of sequences $\acc{x_i}$ and
  $\acc{w_i}$ :
   \begin{itemize}[font= \color{blue} \large, label= $\bullet$]
@@ -33,10 +36,10 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 \item $\acc{x_i}$ selected by the Frank-Wolfe algorithm in order to minimize a posterior variance (described in section \ref{sec:FW}).
   \end{itemize}
 
-  The main interest of the method developed in \cite{FWBQ} is the super fast
+  The main interest of the method developed in \citet{FWBQ} is the super fast
   \textit{exponential} convergence to the true value of the integral compared to the other methods mentioned above.\\
 
-  Through this report, we will detail every results from \cite{FWBQ} with the goal
+  Through this report, we will detail every results from \citet{FWBQ} with the goal
   to clarify and explain details that could have been omitted intentionally or not and which, in our view, make the Briol's and al. approach more natural, intuitive and easier
   to understand.
   % use Bach presentation for convergence rates benchmark
@@ -53,25 +56,31 @@ that $p = \frac{\d \mu}{ \d \lambda}$ where $\lambda$ denotes the Lebesgue measu
  map associated. We denote respectively by $\inner{\cdot}{\cdot}_{H}$ and $\norme{\cdot}_{\H}$
  the inner product and norm induced on $\H$.
 
- Recall that the following propositions hold:
- \begin{propriete}
+ Recall that the following relations hold:
+ \begin{boxexercise}
    \begin{align}
   \forall x \in \X , \quad &k ( \cdot , x ) \in \H\\
   \forall x \in \X , \forall f \in \H , \quad &\langle f , k ( \cdot , x ) \rangle _ { \H } = f ( x )\\
   \forall (x,y) \in \X^2 \quad &k(x,y) = \inner{\Phi(x)}{\Phi(y)}_{\H}
   \end{align}
-\end{propriete}
+\end{boxexercise}
 
 
-Let's denote as \cite{FWBQ}
-\begin{align*}
-  p[f] &:= \int _ { \X } f ( x ) p ( x ) \mathrm { d } x\\
-  \p[f]&:=\sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right).
-\end{align*}
+Let's denote as \citet{FWBQ}
+\begin{boxdefinition}
+  \begin{align*}
+    p[f] &:= \int _ { \X } f ( x ) p ( x ) \mathrm { d } x\\
+    \p[f]&:=\sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right).
+  \end{align*}
+\end{boxdefinition}
+
 
 We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to measure
  the accuracy of the approximation $p[f] \approx \p[f]$ in the worst case scenario and which is defined as
- $$\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right) : = \sup _ { f \in \H : \left[ f \left\| _ { \H } = 1 \right. \right. } | p [ f ] - \hat { p } [ f ] |.$$
+ \begin{boxdefinition}
+    $$\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right) : = \sup _ { f \in \H : \left[ f \left\| _ { \H } = 1 \right. \right. } | p [ f ] - \hat { p } [ f ] |.$$
+ \end{boxdefinition}
+
 
 % montrer que p et $\p$ sont continues
 % théorème de Riesz
@@ -91,3 +100,10 @@ We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to me
 % intuition
 % graph to show that it is closed to a gradient descent
 % drawing line search Aspremont
+
+\section*{Ressources}
+\label{sec:bibli}
+% \nocite{*}
+% \bibliographystyle{plain}
+% \bibliography{bib_project}
+\printbibliography
