@@ -262,6 +262,16 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
  borderline west={1.5mm}{-2mm}{tsforestgreen}]}
 {\end{tcolorbox}}
 
+\newenvironment{boxitemize}
+{
+\abovedisplayskip=0pt
+\begin{tcolorbox}
+[enhanced jigsaw,breakable,pad at break*=1mm,
+ colback=white,boxrule=0pt,frame hidden,
+ leftrule=1mm,
+ borderline west={1mm}{-2mm}{ggred}]}
+{\end{tcolorbox}}
+
 \newenvironment{boxexercise}
 {
 \abovedisplayskip=0pt
@@ -411,6 +421,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 
 \newenvironment{walpha}
 {\marginnote{\includegraphics[width=1.0cm]{wolframalpha}}}
+
 
 % Bibliography - commented out by mav it does not work on overleaf
 %--------------------------------------------------------------------------

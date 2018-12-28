@@ -2,6 +2,7 @@
 We start with some notations we will use along this report.
 \begin{itemize}[font= \color{blue} \large, label= $\bullet$]
  \item For any function, $g(\cdot)$ denotes the function $g: x \mapsto g(x)$.
+ \item In integrals, $\d x$ denote $\d \lambda(x)$, \ie with respect to the Lebesgue measure.
 \end{itemize}
 
 \section*{Introduction}
@@ -51,25 +52,25 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 %WHY RKHS, WHY so USEFUL ?
 Let $\X \subseteq \R ^ { d }$ be a measurable space, $\mu$ a measure on $\X$ such
 that $p = \frac{\d \mu}{ \d \lambda}$ where $\lambda$ denotes the Lebesgue measure on $\X$,
-  $\H \subset L^2(\X; \mu)$ be an RKHS with a
+  $\H \subset L^2(\X, \R; \mu)$ be an RKHS with a
  reproducing kernel $k: \X \times \X \rightarrow \R$, $\Phi$ its canonical feature
- map associated. We denote respectively by $\inner{\cdot}{\cdot}_{H}$ and $\norme{\cdot}_{\H}$
- the inner product and norm induced on $\H$.
+ map associated. We denote respectively by $\bigps{\cdot}{\cdot}$ and $\norme{\cdot}$
+ the bigps product and norm induced on $\H$.
 
  Recall that the following relations hold:
  \begin{boxexercise}
    \begin{align}
   \forall x \in \X , \quad &k ( \cdot , x ) \in \H\\
   \forall x \in \X , \forall f \in \H , \quad &\langle f , k ( \cdot , x ) \rangle _ { \H } = f ( x )\\
-  \forall (x,y) \in \X^2 \quad &k(x,y) = \inner{\Phi(x)}{\Phi(y)}_{\H}
+  \forall (x,y) \in \X^2 \quad &k(x,y) = \bigps{\Phi(x)}{\Phi(y)}
   \end{align}
 \end{boxexercise}
 
 
-Let's denote as \cite{FWBQ}
+Let's denote as \cite{FWBQ}:
 \begin{boxdefinition}
   \begin{align*}
-    p[f] &:= \int _ { \X } f ( x ) p ( x ) \mathrm { d } x\\
+    p[f] &:= \int _ { \X } f ( x ) \mathrm { d } \mu(x) = \int _ { \X } f ( x ) p ( x ) \mathrm { d } x\\
     \p[f]&:=\sum _ { i = 1 } ^ { n } w _ { i } f \left( x _ { i } \right).
   \end{align*}
 \end{boxdefinition}
@@ -78,17 +79,62 @@ Let's denote as \cite{FWBQ}
 We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to measure
  the accuracy of the approximation $p[f] \approx \p[f]$ in the worst case scenario and which is defined as
  \begin{boxdefinition}
-    $$\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right) : = \sup _ { f \in \H : \left[ f \left\| _ { \H } = 1 \right. \right. } | p [ f ] - \hat { p } [ f ] |.$$
+    $$\MMD : = \sup _ { f \in \H : \norme{f}=1 } | p [ f ] - \hat { p } [ f ] |.$$
  \end{boxdefinition}
 
+ Let's show (formula 3. in \cite{FWBQ}) that MMD can be rewrite as
+ \begin{boxtheorem}
+   \begin{align}
+     \MMD = \left\| \mu _ { p } - \mu _ { \hat { p } } \right\| _ { \mathcal { H } }
+   \end{align}
+   where $\mu_p(\cdot) = p[\Phi(\cdot)]$ and $\mu_{\p}(\cdot) = \p[\Phi(\cdot)]$.
+ \end{boxtheorem}
 
-% montrer que p et $\p$ sont continues
-% théorème de Riesz
-% écrire produit scalaire
+ \begin{boxitemize}
+   \begin{itemize}[leftmargin=*, font= \color{blue} \large, label= $\bullet$]
+     \item \textbf{For all $f$ in $\H$, we have $p[f] = \bigps{f}{\mu_p}$.}
+     \begin{align*}
+       p[f] &= \int_{\X} f(x)p(x) \d x\\
+       &= \int_{\X} \delta_x[f] p(x) \d x\\
+       &= \int_{\X} \bigps{f}{\Phi(x)} p(x) \d x\\%TODO Not obvious
+       &=  \bigps{f}{\int_{\X} \Phi(x)p(x) \d x} \\
+       &= \bigps{f}{\mu_p}
+     \end{align*}
+     \item \textbf{For all $f$ in $\H$, we have $\p[f] = \bigps{f}{\mu_{\p}}$.}
+     \begin{align*}
+       \p[f] &= \sum_{i=1}^n w_i f(x_i)\\
+       &= \sum_{i=1}^n w_i \delta_{x_i}[f]\\
+       &= \sum_{i=1}^n w_i \bigps{f}{\Phi(x_i)}\\%TODO Not obvious
+       &=  \bigps{f}{\sum_{i=1}^n w_i \Phi(x_i)} \\
+       &= \bigps{f}{\mu_{\p}}
+     \end{align*}
+\item By using previous results and the Cauchy-schwartz inequality, we get :
+\begin{align*}
+\MMD &= \sup _ { f \in \H : \norme{f} = 1 } \abs{
+\bigps{f}{\mu_{p}-\mu_{\p}} }\\
+&\leq \sup _ { f \in \H : \norme{f} = 1 } \norme{f} \norme{\mu_{p}-\mu_{\p}}\\
+&= \norme{\mu_{p}-\mu_{\p}}
+\end{align*}
+with equality if and only if $f$ and  $\mu_{p}-\mu_{\p}$ are linearly dependent.
+We deduce the desired result by taking $ \displaystyle f = \frac{1}{\norme{\mu_{p}-\mu_{\p}}}\prt{\mu_{p}-\mu_{\p}}$.
+
+   \end{itemize}
+ \end{boxitemize}
+
+
 % on maximise avec cauchy schwartz + égalité
 
 \section{Bayesian Quadrature}
 \label{sec:BQ}
+Let's place a functional prior on the integrand $f$. We will assume that $f$ to be
+ a \textit{centered} \textbf{gaussian process} with the kernel $k$ as its covariance
+ function, \ie
+ \begin{boxexample}
+   \begin{align*}
+     \forall x \in \H, \quad  &\Expec{f(x)} = 0\\
+     \forall x, y \in \H, \quad  &\Cov{f(x)}{f(y)} = k(x,y)
+   \end{align*}
+ \end{boxexample}
 % introduction gaussian process
 % show that $p[f]$ is also a gaussian process (which expectation and variance)
 % Conditional rule demonstrated
@@ -101,7 +147,7 @@ We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to me
 % graph to show that it is closed to a gradient descent
 % drawing line search Aspremont
 
-\section*{Ressources}
+\section*{Resources}
 \label{sec:bibli}
 
 \nocite{*}

@@ -36,5 +36,7 @@ give also the same formulas
 
 * [Code example](https://github.com/jcockayne/ProbNumPy?fbclid=IwAR1QE6jT4sAXiczhatB4q7q_dK5cQiYZu6BY95pW8PMbqYdHdCik2uyXBwI)
 
+* [inner product and integral](http://www.les-mathematiques.net/phorum/read.php?4,1403756,1404608)
+
 # Latex config
 - **run file**: "xelatex" %.tex|"/Library/TeX/texbin/biber" %.bcf|"xelatex" %.tex|open %.pdf

@@ -41,6 +41,7 @@
 \newcommand{\p}{\hat{p}} %estimateur
 \newcommand{\lestim}{\hat{\lambda}} %estimateur
 \newcommand{\Aopt}{A^{\star}} %estimateur
+\newcommand{\MMD}{\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right)}
 % \renewcommand{\H}{\Uptheta} %ensemble des estimateurs
 \newcommand{\Var}{\mathrm{Var}} %variance
 \newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
@@ -51,8 +52,9 @@
 \newcommand{\tbar}{\mathbf{\thickbar{\theta}}}
 \newcommand{\lbar}{\mathbf{\thickbar{\lambda}}}
 \newcommand{\ssg}{$\sigma$-\textit{SG} }
-\newcommand{\Proba}[1]{\mathbb{P} \prt{#1}}
-\newcommand{\Expec}[1]{\mathbb{E} \prt{#1}}
+\newcommand{\Proba}[1]{\mathbb{P} \cro{#1}}
+\newcommand{\Expec}[1]{\mathbb{E} \cro{#1}}
+\newcommand{\Cov}[2]{\mathrm{Cov} \cro{#1, #2}}
 \newcommand{\Jestim}{\hat{J}} %estimateur des indices des relevant variables
 \newcommand{\Jopt}{J^{\star}} %estimateur des indices des relevant variables
 \newcommand{\spm}{\raisebox{.2ex}{$\scriptstyle\pm$}} % plus or minus
@@ -228,6 +230,7 @@
 \newcommand{\rightp}{\right)}
 \newcommand{\prt}[1]{\left( \, #1  \, \right)}
 \newcommand{\acc}[1]{\left \{ \, #1 \, \right \}}
+\newcommand{\cro}[1]{\left[ \, #1 \, \right]}
 % ==================================================
 % Valeur abslue
 % ==================================================
@@ -248,7 +251,7 @@
 % ==================================================
 % Norme empirique
 % ==================================================
-\newcommand{\norme}[1]{\left\lVert\ifempty{#1}{\dotpourvariable}{#1}\right\rVert}
+\newcommand{\norme}[1]{\left\lVert\ifempty{#1}{\dotpourvariable}{#1}\right\rVert_{\H}}
 \newcommand{\bignorme}[1]{\bigl\lVert#1\bigr\rVert}
 \newcommand{\Bignorme}[1]{\Bigl\lVert#1\Bigr\rVert}
 \newcommand{\biggnorme}[1]{\biggl\lVert#1\biggr\rVert}
@@ -256,12 +259,12 @@
 % ==================================================
 % Produit scalaire
 % ==================================================
-\newcommand\inner[2]{\langle #1, #2 \rangle}
-\newcommand{\ps}[2]{\mathopen(\ifempty{#1}{\dotpourvariable}{#1}\!\mid\!\ifempty{#2}{\dotpourvariable}{#2}\mathclose)}
-\newcommand{\bigps}[2]{\bigl( #1 \!\mid\! #2 \bigr)}
-\newcommand{\Bigps}[2]{\Bigl( #1 \!\mid\! #2 \Bigr)}
-\newcommand{\biggps}[2]{\biggl( #1 \!\mid\! #2 \biggr)}
-\newcommand{\Biggps}[2]{\Bigl( #1 \!\mid\! #2 \Biggr)}
+\newcommand\inner[2]{\langle #1, #2 \rangle_{\H}}
+\newcommand{\ps}[2]{\langle \ifempty{#1}{\dotpourvariable}{#1}\!, \ifempty{#2}{\dotpourvariable}{#2} \rangle_{\H}}
+\newcommand{\bigps}[2]{\bigl \langle #1 ,  #2 \bigr \rangle_{\H}}
+\newcommand{\Bigps}[2]{\Bigl \langle #1 ,  #2 \Bigr \rangle_{\H}}
+\newcommand{\biggps}[2]{\biggl \langle #1 ,  #2 \biggr \rangle_{\H}}
+\newcommand{\Biggps}[2]{\Bigl \langle #1 ,  #2 \Biggr \rangle_{\H}}
 % ==================================================
 % Produit scalaire crochet
 % ==================================================
@@ -377,7 +380,7 @@
 \DeclareMathOperator{\Card}{Card}
 \DeclareMathOperator{\conv}{conv}
 \DeclareMathOperator{\cor}{cor}
-\DeclareMathOperator{\Cov}{Cov}
+% \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\sh}{sh}
 \DeclareMathOperator{\sgn}{signe}
