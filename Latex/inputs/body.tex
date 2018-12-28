@@ -151,14 +151,49 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
       \Expec{p[f]} &= \int_{\Omega} p[f](w) \d \P(w)\\
       &= \int_{\Omega} \int_{\X} f(x,w) \d \mu(x)  \d \P(w)\\
       &= \int_{\X} \underbrace{\int_{\Omega}  f(x,w) \d \P(w)}_{\Expec{f(x)}=0} \d \mu(x)  \\
-      &=0
-  \end{align*}
-  \begin{align*}
-    \Var{p[f]} &= \Expec{p[f]^2} = \int_{\Omega} p[f](w)^2 \d \P(w)
-  \end{align*}
+      &=0\\
+      \Var{p[f]} &= \Expec{p[f]^2} = \int_{\Omega} p[f](w)^2 \d \P(w)\\
+      &=\int_{\Omega} \prt{\int_{\X} f(x,w) \d \mu(x)}^2 \d \P(w)\\
+      &=\int_{\Omega} \prt{\int_{\X^2} f(x,w)f(y,w) \d \mu(x) \d \mu(y)} \d \P(w)\\
+      &= \int_{\X^2} \underbrace{\int_{\Omega}  f(x,w)f(y,w) \d \P(w)}_{=\Cov{f(x)}{f(y)} = k(x,y)} \d \mu(x) \d \mu(y) \\
+      &= \int_{\X^2}  k(x,y) \d \mu(x) \d \mu(y)
+    \end{align*}
 \end{boxitemize}
 
-% show that $p[f]$ is also a gaussian process (which expectation and variance)
+Assume that samples $\acc{x_i}$ and $\acc{f_i} := \acc{f(x_i)}$ are given for $i=1$ to $n$. How to update the weights $\acc{w_i}_{i=1}^n $?
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.20]{bq.png}
+\caption{Bayesian quadrature approach. \textit{Source:} \cite{duvenaud}}
+\label{fig:bq}
+\end{figure}
+
+First of all, let's determine the conditional distribution $\displaystyle
+ p[f]| \; \mathbf{f}$ where
+$\mathbf{f} = \transpose{\prt{f_1, \ldots, f_n}}$.
+Since both $p[f]$ and $\mathbf{f}$ are gaussian, we can use the conditional gaussian rule:
+\begin{boxtheorem}
+  By denoting, $y_1 := p[f]$, $y_2 = \mathbf{f}$, $y = \begin{pmatrix}
+    y_1\\y_2
+\end{pmatrix}$, $\displaystyle \Sigma = \begin{pmatrix}
+  \Sigma_{1,1}, \Sigma_{1,2}\\
+  \Sigma_{2,1}, \Sigma_{2,2}
+\end{pmatrix}$ its covariance matrix by blocks, we have :
+$$p[f]| \; \mathbf{f} \sim \mathcal { N } (  \mu  , \Stilde )$$
+where
+
+  %
+  %
+
+  \begin{equation*}
+  \begin{cases}
+    \mu \;&= \;  \Sigma _ { 12 } \; \Sigma _ { 22 } ^ { - 1 } \; \mathbf{f} \\
+     \Stilde \; &= \;  \Sigma _ { 11 } \;- \Sigma _ { 12 } \;\Sigma _ { 22 } ^ { - 1 } \; \Sigma _ { 21 }.
+  \end{cases}
+\end{equation*}
+\end{boxtheorem}
+
 % Conditional rule demonstrated
 % Demonstration formula 4
 % Demonstration formula 5

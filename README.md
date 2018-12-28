@@ -17,12 +17,17 @@ very useful to describe how to build a RKHS, and to give intuition and proof of
  mapping (phi(x) for all x in X) in the feature space H (RKHS).
  * [What makes the reproducing kernel Hilbert spaces point of view useful in machine learning?](https://www.quora.com/What-makes-the-reproducing-kernel-Hilbert-spaces-point-of-view-useful-in-machine-learning)
 
+## Bayesian Quadrature
+- [Toronto](https://www.cs.toronto.edu/~duvenaud/talks/intro_bq.pdf)
+
 ## Gaussian process and conditional gaussian rule
 - [Regression](http://www.gaussianprocess.org/gpml/chapters/RW2.pdf?fbclid=IwAR0n58_3Ld3d86dHy4zZvxFUm5WzPFR0XEC-5gx0PDZKioL3jTDBWQAZ2iM):
 useful page 10 where we learn the condition gaussian rule. Useful to compute
 the conditional expectation of p[f] and also the conditional variance.
 - [Bayesian Quadrature for multiple integrals](https://arxiv.org/pdf/1801.04153.pdf?fbclid=IwAR3nJ63cmJQh0JO5luHYejIK0BWgd8WJqGiHe2lt7ILWjP46p0LJnDlRUWY):
 give also the same formulas
+
+- [Proof conditional rule](https://stats.stackexchange.com/questions/30588/deriving-the-conditional-distributions-of-a-multivariate-normal-distribution)
 
 ## Frank Wolfe algorithm
 - [Bach et al](https://arxiv.org/pdf/1203.4523.pdf?fbclid=IwAR3tVnsQrKCK_Tkb7WgRSKwQQuyg8ewNqCFTpzGTLFIv0EYs2a3JQAtOxCo)
