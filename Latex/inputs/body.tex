@@ -150,8 +150,7 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
     \begin{align*}
       \Expec{p[f]} &= \int_{\Omega} p[f](w) \d \P(w)\\
       &= \int_{\Omega} \int_{\X} f(x,w) \d \mu(x)  \d \P(w)\\
-      &= \int_{\X} \underbrace{\int_{\Omega}  f(x,w) \d \P(w)}_{\Expec{f(x)}=0} \d \mu(x)  \\
-      &=0\\
+      &= \int_{\X} \underbrace{\int_{\Omega}  f(x,w) \d \P(w)}_{\Expec{f(x)}=0} \d \mu(x)  =0\\
       \Var{p[f]} &= \Expec{p[f]^2} = \int_{\Omega} p[f](w)^2 \d \P(w)\\
       &=\int_{\Omega} \prt{\int_{\X} f(x,w) \d \mu(x)}^2 \d \P(w)\\
       &=\int_{\Omega} \prt{\int_{\X^2} f(x,w)f(y,w) \d \mu(x) \d \mu(y)} \d \P(w)\\
@@ -160,7 +159,7 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
     \end{align*}
 \end{boxitemize}
 
-Assume that samples $\acc{x_i}$ and $\acc{f_i} := \acc{f(x_i)}$ are given for $i=1$ to $n$. How to update the weights $\acc{w_i}_{i=1}^n $?
+Assume that samples $\acc{x_i}$ and $\acc{f_i} := \acc{f(x_i)}$ are given for $i=1$ to $n$ and denote by $K:= \prt{k(x_i, x_j)}_{1 \leq i,j \leq n}$. A natural question arises: how to update the weights $\acc{w_i}_{i=1}^n $?
 
 \begin{figure}[H]
 \centering
@@ -173,7 +172,7 @@ First of all, let's determine the conditional distribution $\displaystyle
  p[f]| \; \mathbf{f}$ where
 $\mathbf{f} = \transpose{\prt{f_1, \ldots, f_n}}$.
 Since both $p[f]$ and $\mathbf{f}$ are gaussian, we can use the conditional gaussian rule:
-\begin{boxtheorem}
+\begin{boxdefinition}
   By denoting, $y_1 := p[f]$, $y_2 = \mathbf{f}$, $y = \begin{pmatrix}
     y_1\\y_2
 \end{pmatrix}$, $\displaystyle \Sigma = \begin{pmatrix}
@@ -192,7 +191,40 @@ where
      \Stilde \; &= \;  \Sigma _ { 11 } \;- \Sigma _ { 12 } \;\Sigma _ { 22 } ^ { - 1 } \; \Sigma _ { 21 }.
   \end{cases}
 \end{equation*}
-\end{boxtheorem}
+\end{boxdefinition}
+
+Let's determine what $\mu$ and $\Stilde$ look like in our context.
+  \begin{boxitemize}
+\begin{align*}
+  \Sigma _ { 22 } &= \prt{\Cov{f_i}{f_j}}_{1 \leq i,j \leq n}\\
+  &= \prt{\Cov{f(x_i)}{f(x_j)}}_{1 \leq i,j \leq n}\\
+  &= \prt{k(x_i, x_j)}_{1 \leq i,j \leq n}\\
+  &= K\\
+  \mu &= \begin{pmatrix}
+    \Cov{p[f]}{f_1} \\ \ldots \\ \Cov{p[f]}{f_n}\\
+\end{pmatrix} K^{-1} \mathbf{f}
+\end{align*}
+Let's rewrite the vector from the left:
+\begin{align*}
+\Cov{p[f]}{f_i} &= \int_{\Omega} p[f](w) f(x_i, w) \d \P(w)\\
+&= \int_{\Omega} \int_{\X} f(x, w) \d \mu(x) f(x_i, w) \d \P(w)\\
+&=  \int_{\X}  \underbrace{\int_{\Omega} f(x, w) f(x_i, w) \d \P(w)}_{=\Cov{f(x)}{f(x_i)}=k(x,x_i)} \d \mu(x) \\
+&= \int_{\X} k(x,x_i)\d \mu(x)\\
+&= \int_{\X} \Phi(x_i)(x) \d \mu(x)\\
+&= p[\Phi(x_i)]\\
+&= \mu_p \prt{x_i}\\
+\end{align*}
+\end{boxitemize}
+
+By denoting $z := \prt{z_i}_{i=1}^n = \prt{\mu_p \prt{x_i}}_{i=1}^n \in \R^n$, we
+ get the desired formula\footnote{formula 4 in \cite{FWBQ} } for the expectation:
+ \begin{boxtheorem}
+   \begin{equation}
+     \mu = z ^ { T } K ^ { - 1 } \mathbf { f }
+   \end{equation}
+ \end{boxtheorem}
+
+
 
 % Conditional rule demonstrated
 % Demonstration formula 4
