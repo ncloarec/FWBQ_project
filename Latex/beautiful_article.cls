@@ -300,7 +300,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 {
 \abovedisplayskip=0pt
 \begin{tcolorbox}
-[enhanced jigsaw,breakable,pad at break*=1mm,
+[enhanced jigsaw,breakable,pad at break*=0mm,
  colback=tsgrey!20,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
