@@ -6,7 +6,7 @@ We start with some notations we will use along this report.
 
 \section*{Introduction}
 
-The goal of the article \citet{FWBQ} is to compute efficiently the integrals of the form
+The goal of the article \cite{FWBQ} is to compute efficiently the integrals of the form
 $ \displaystyle \int _ { \X } f ( x ) p ( x ) \mathrm { d } x$
 where $\X \subseteq \R ^ { d }$ is a measurable space,
 $d \geq 1$ integer representing the dimension of the problem, $p$ a probability
@@ -36,10 +36,10 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 \item $\acc{x_i}$ selected by the Frank-Wolfe algorithm in order to minimize a posterior variance (described in section \ref{sec:FW}).
   \end{itemize}
 
-  The main interest of the method developed in \citet{FWBQ} is the super fast
+  The main interest of the method developed in \cite{FWBQ} is the super fast
   \textit{exponential} convergence to the true value of the integral compared to the other methods mentioned above.\\
 
-  Through this report, we will detail every results from \citet{FWBQ} with the goal
+  Through this report, we will detail every results from \cite{FWBQ} with the goal
   to clarify and explain details that could have been omitted intentionally or not and which, in our view, make the Briol's and al. approach more natural, intuitive and easier
   to understand.
   % use Bach presentation for convergence rates benchmark
@@ -66,7 +66,7 @@ that $p = \frac{\d \mu}{ \d \lambda}$ where $\lambda$ denotes the Lebesgue measu
 \end{boxexercise}
 
 
-Let's denote as \citet{FWBQ}
+Let's denote as \cite{FWBQ}
 \begin{boxdefinition}
   \begin{align*}
     p[f] &:= \int _ { \X } f ( x ) p ( x ) \mathrm { d } x\\
@@ -103,7 +103,6 @@ We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to me
 
 \section*{Ressources}
 \label{sec:bibli}
-% \nocite{*}
-% \bibliographystyle{plain}
-% \bibliography{bib_project}
-\printbibliography
+
+\nocite{*}
+\printbibliography[heading=none]

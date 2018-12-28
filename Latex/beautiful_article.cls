@@ -414,18 +414,11 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 
 % Bibliography - commented out by mav it does not work on overleaf
 %--------------------------------------------------------------------------
-% \RequirePackage[backend=biber]{biblatex}
-\RequirePackage[autostyle]{csquotes}
-\RequirePackage[
-    backend=biber,
-    style=authoryear-icomp,
-    sortlocale=de_DE,
-    natbib=true,
-    url=false,
-    doi=true,
-    eprint=false
-]{biblatex}
+\usepackage[backend=biber,defernumbers=true]{biblatex}
 \addbibresource{bib_project.bib}
+
+% Hyperref
+%--------------------------------------------------------------------------
 
 \RequirePackage[]{hyperref}
 \hypersetup{

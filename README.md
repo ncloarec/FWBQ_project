@@ -35,3 +35,6 @@ give also the same formulas
 * [Riesz representation theorem](https://en.wikipedia.org/wiki/Riesz_representation_theorem)
 
 * [Code example](https://github.com/jcockayne/ProbNumPy?fbclid=IwAR1QE6jT4sAXiczhatB4q7q_dK5cQiYZu6BY95pW8PMbqYdHdCik2uyXBwI)
+
+# Latex config
+- **run file**: "xelatex" %.tex|"/Library/TeX/texbin/biber" %.bcf|"xelatex" %.tex|open %.pdf
