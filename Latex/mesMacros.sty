@@ -43,7 +43,6 @@
 \newcommand{\Aopt}{A^{\star}} %estimateur
 \newcommand{\MMD}{\operatorname { MMD } \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right)}
 % \renewcommand{\H}{\Uptheta} %ensemble des estimateurs
-\newcommand{\Var}{\mathrm{Var}} %variance
 \newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
 \newcommand{\thickbar}[1]{\mathbf{\bar{\text{$#1$}}}}
 \newcommand{\thicktilde}[1]{\mathbf{\tilde{\text{$#1$}}}}
@@ -52,9 +51,13 @@
 \newcommand{\tbar}{\mathbf{\thickbar{\theta}}}
 \newcommand{\lbar}{\mathbf{\thickbar{\lambda}}}
 \newcommand{\ssg}{$\sigma$-\textit{SG} }
-\newcommand{\Proba}[1]{\mathbb{P} \cro{#1}}
-\newcommand{\Expec}[1]{\mathbb{E} \cro{#1}}
-\newcommand{\Cov}[2]{\mathrm{Cov} \cro{#1, #2}}
+\newcommand{\Proba}[1]{\mathbb{P} \, \cro{#1}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Expecc}[1]{\mathbb{E} \,\cro{#1}}
+\newcommand{\Varc}[1]{\mathbb{V}\,\cro{#1}}
+\newcommand{\Cov}[2]{\mathrm{Cov} \, \cro{#1, #2}}
+\newcommand{\Var}[1]{\mathbb{V} \,#1}
+\newcommand{\Expec}[1]{\mathbb{E}  \, #1}
 \newcommand{\Jestim}{\hat{J}} %estimateur des indices des relevant variables
 \newcommand{\Jopt}{J^{\star}} %estimateur des indices des relevant variables
 \newcommand{\spm}{\raisebox{.2ex}{$\scriptstyle\pm$}} % plus or minus
@@ -100,9 +103,6 @@
 \renewcommand*{\i}{\ensuremath{\mathrm{i}}}
 \newcommand*{\I}{\ensuremath{\mathrm{I}}}
 \newcommand*{\Id}{\ensuremath{\mathrm{Id}}}
-\newcommand*{\E}{\ensuremath{\mathrm{E}}}
-\newcommand*{\V}{\ensuremath{\mathrm{V}}}
-\def\P{\ensuremath{\mathrm{P}}}
 % ==================================================
 % Matrices
 % ==================================================
