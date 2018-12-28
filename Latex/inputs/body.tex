@@ -156,7 +156,11 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
     \begin{align*}
       \Expec{p[f]} &= \int_{\Omega} p[f](w) \d \P(w)\\
       &= \int_{\Omega} \int_{\X} f(x,w) \d \mu(x)  \d \P(w)\\
-      &= \int_{\X} \underbrace{\int_{\Omega}  f(x,w) \d \P(w)}_{\Expec{f(x)}=0} \d \mu(x)  =0\\
+      &= \int_{\X} \underbrace{\int_{\Omega}  f(x,w) \d \P(w)}_{\Expec{f(x)}=0} \d \mu(x)  =0
+    \end{align*}
+\end{boxitemize}
+\begin{boxitemize}
+  \begin{align*}
       \Var{p[f]} &= \Expec{p[f]^2} = \int_{\Omega} p[f](w)^2 \d \P(w)\\
       &=\int_{\Omega} \prt{\int_{\X} f(x,w) \d \mu(x)}^2 \d \P(w)\\
       &=\int_{\Omega} \int_{\X^2} f(x,w)f(y,w) \d \mu(x) \d \mu(y) \d \P(w)\\
@@ -167,10 +171,10 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
 
 Assume that samples $\acc{x_i}$ and $\acc{f_i} := \acc{f(x_i)}$ are given for $i=1$ to $n$ and denote by $K:= \prt{k(x_i, x_j)}_{1 \leq i,j \leq n}$. A natural question arises: how to update the weights $\acc{w_i}_{i=1}^n $?
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[scale=.20]{bq.png}
-\caption{Bayesian quadrature approach. \textit{Source:} \cite{duvenaud}}
+\includegraphics[scale=.33]{bq.png}
+\caption{An illustration of Bayesian Quadrature.\\\textit{Source:} \cite{huszar}}
 \label{fig:bq}
 \end{figure}
 
