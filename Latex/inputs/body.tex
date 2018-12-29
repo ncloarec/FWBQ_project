@@ -237,13 +237,15 @@ By denoting $z := \prt{z_i}_{i=1}^n = \prt{\mu_p \prt{x_i}}_{i=1}^n \in \R^n$, w
  \end{boxtheorem}
 
 The variance is then straightforward :
-
+\begin{boxexample}
   \begin{align*}
     \Stilde &= \Var{p[f]} - z ^ { T } K ^ { - 1 } z\\
-    &= \int_{\X^2}  k(x,y) \d \mu(x) \d \mu(y) - z ^ { T } K ^ { - 1 } z\\
+    &= \int_{\X^2}  k(x,y) \d \mu(x) \d \mu(y) - z ^ { T } K ^ { - 1 } z
   \end{align*}
-We need to simplify the integral to obtain the desired formula for the variance:
+\end{boxexample}
+
 \begin{boxitemize}
+  We need to simplify the integral to obtain the desired formula for the variance:
 \begin{align*}
   \int_{\X^2}  k(x,y) \d \mu(x) \d \mu(y) &= \int_{\X} \int_{\X} \Phi(x)(y) \d \mu(y) \d \mu(x) \\
   &= \int_{\X} p[\Phi(x)] \d \mu(x) \\
@@ -256,12 +258,24 @@ which leads us to the desired result:
   $$\Stilde = p[\mu_p] -z ^ { T } K ^ { - 1 } z$$
 \end{boxtheorem}
 
+Both the conditional expectation and variance are essentials in the FWBQ\footnote{Frank-Wolfe Bayesian Quadrature} algorithm:
+\begin{itemize}[font= \color{blue} \large, label= $\bullet$]
+  \item $\mu = z ^ { T } K ^ { - 1 } \mathbf { f }$ which can be written as
+  $\displaystyle \mu = \sum_{i=1}^n w_i^{BQ} f_i$ where $w^{BQ} := \transpose{\prt{K^{-1}}}z$. $\mu$ appears to be the \textbf{most natural estimation of our integral} $p[f]$.
+  It also gives us the \textbf{new weights to update}.
+  \item $\Stilde = p[\mu_p] -z ^ { T } K ^ { - 1 } z$ which is also equal to $\MMD^2$
+  according to \cite{huszar} and can be interpreted as our \textbf{uncertainty}. Therefore
+  we need to \textbf{choose $\acc{x_i}$ which minimize this quantity}. This will be achieved
+  by using the Frank Wolfe algorithm described in the next section.
+\end{itemize}
+
 % Conditional rule demonstrated
 % Demonstration formula 4
 % Demonstration formula 5
 
 \section{Frank-Wolfe algorithm}
 \label{sec:FW}
+
 % intuition
 % graph to show that it is closed to a gradient descent
 % drawing line search Aspremont
