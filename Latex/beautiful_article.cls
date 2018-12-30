@@ -472,6 +472,13 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 \RequirePackage{bm}
 \RequirePackage{ bbold }
 
+% Drawing
+%--------------------------------------------------------------------------
+\RequirePackage{pgf,tikz,pgfplots}
+\pgfplotsset{compat=1.15}
+\RequirePackage{mathrsfs}
+\usetikzlibrary{arrows}
+
 % Other useful packages
 %--------------------------------------------------------------------------
 \RequirePackage{blindtext}

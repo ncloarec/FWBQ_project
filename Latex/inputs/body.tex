@@ -275,12 +275,33 @@ Both the conditional expectation and variance are essentials in the FWBQ\footnot
 \section{Frank-Wolfe algorithm}
 \label{sec:FW}
 
-\begin{mydescription}
-  \item [Bananas] yellow and banana shaped
-  \item [Apples] red and round
-  \item [Oranges] orange and round
-  \item [Lemons] yellow, kinda round
-\end{mydescription}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\clip(-10.24,-6.28) rectangle (0.24,2);
+\fill[line width=2pt,color=ggyellow,fill=ggyellow,fill opacity=0.10000000149011612] (-5.58,1.24) -- (-3.52,1.34) -- (-1.08,-1.24) -- (-4.38,-3.46) -- (-8.1,-2.2) -- cycle;
+\draw [color=ggyellow] (-5.58,1.24)-- (-3.52,1.34);
+\draw [color=ggyellow] (-3.52,1.34)-- (-1.08,-1.24);
+\draw [color=ggyellow] (-1.08,-1.24)-- (-4.38,-3.46);
+\draw [color=ggyellow] (-4.38,-3.46)-- (-8.1,-2.2);
+\draw [color=ggyellow] (-8.1,-2.2)-- (-5.58,1.24);
+\draw [->] (-4.42,-0.94) -- (-3.02,-0.1);
+\draw [dotted] (-4.42,-0.94)-- (-7.29,-2.47);
+\draw [->] (-5.41,-1.47) -- (-4.42,-1.84);
+\draw [dotted] (-5.41,-1.47)-- (-7.10,-0.84);
+  \node[draw] at (-3.02,0.3)  (grad1) {$\mathbf{\nabla J(g_1)}$};
+  \node[draw] at (-4.22,-2.3)  (grad2) {$\mathbf{\nabla J(g_2)}$};
+\draw [fill=blue] (-4.42,-0.94) circle (2pt) node[below] {$\mathbf{g_1}$};
+\draw [fill=blue] (-7.294,-2.47) circle (2pt) node[shift={(-1.5ex,-1.5ex)}] {$\mathbf{\overline{g_2}}$};
+\draw [fill=blue] (-5.41,-1.47) circle (2pt) node[shift={(0ex,-2.5ex)}] {$\mathbf{g_2}$};
+\draw [fill=blue] (-7.10,-0.846) circle (2pt) node[shift={(-1.5ex,1.5ex)}] {$\mathbf{\overline{g_3}}$};
+\draw [fill=blue] (-6.01,-1.246) circle (2pt) node[shift={(0ex,2.5ex)}] {$\mathbf{g_3}$};
+\draw[->,ggred, looseness=2] (-4.42,-0.94) .. controls (0,-2.3) and  (-4,-4.5) .. node[sloped] {} (-7.29,-2.47);
+\draw[->,ggred] (-7.29,-2.47) -- (-5.41,-1.47);
+\draw[->,ggred, looseness=2] (-5.41,-1.47) .. controls (-5.6,0.5) .. node[sloped] {} (-7.10,-0.846);
+\draw[->,ggred] (-7.10,-0.846) -- (-6.01,-1.246);
+\end{tikzpicture}
+% \caption{An illustration of the Frank-Wolfe algorithm.} \label{fig:FW}
+
+
 
 % intuition
 % graph to show that it is closed to a gradient descent
