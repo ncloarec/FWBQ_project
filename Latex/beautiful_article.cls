@@ -105,6 +105,9 @@
 \definecolor{midnightblue}{RGB}{0,103,148}
 \definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
 \definecolor{periwinkle}{rgb}{0.8, 0.8, 1.0}
+\definecolor{mypurple}{RGB}{128, 0, 128}
+\definecolor{electriccrimson}{rgb}{1.0, 0.0, 0.25}
+\definecolor{myorange}{RGB}{255, 145, 0}
 
 % Graphics
 %--------------------------------------------------------------------------
@@ -262,14 +265,14 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
  borderline west={1.5mm}{-2mm}{tsforestgreen}]}
 {\end{tcolorbox}}
 
-\newenvironment{boxitemize}
+\newenvironment{boxcomputation}
 {
 \abovedisplayskip=0pt
 \begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
  colback=white,boxrule=0pt,frame hidden,
  leftrule=1mm,
- borderline west={1mm}{-2mm}{ggred}]}
+ borderline west={1mm}{-2mm}{mypurple}]}
 {\end{tcolorbox}}
 
 \newenvironment{boxexercise}
@@ -285,7 +288,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 \abovedisplayskip=0pt
 \begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
- colback=tsorange!25,boxrule=0pt,frame hidden]}
+ colback=myorange!25,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
 \newenvironment{boxprogramming}
@@ -303,6 +306,14 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 [enhanced jigsaw,breakable,pad at break*=0mm,
  colback=tsgrey!20,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
+
+\newenvironment{mydescription}
+{\begin{description}[font=$\bullet$~\normalfont\bfseries\color{myorange!90!black}]}
+{\end{description}}
+
+\newenvironment{myitemize}[1][.5cm]
+{\begin{itemize}[font= \color{blue} \large, label= $\bullet$, leftmargin=#1, noitemsep,topsep=0pt]}
+{\end{itemize}}
 
 % Styling of theorems
 %--------------------------------------------------------------------------
@@ -473,6 +484,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 \RequirePackage{float} %forcing figure to be there
 \RequirePackage{subcaption} %for multiple caption when having more than one figure
 \RequirePackage{enumitem} %change puce list
+\setlist[description]{font=\textendash\enskip\scshape\bfseries}
 \RequirePackage{pifont} %add ding for item
 
 \usepackage{titling}

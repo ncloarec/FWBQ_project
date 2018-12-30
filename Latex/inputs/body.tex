@@ -23,32 +23,31 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 
  but of course the real challenge lies in the choice of sequences $\acc{x_i}$ and
  $\acc{w_i}$ :
-  \begin{itemize}[font= \color{blue} \large, label= $\bullet$]
-    \item \textbf{Monte Carlo}: $w_i = \frac{1}{n}$ and $x_i$ realization of multivariate
+  \begin{mydescription}
+    \item [Monte Carlo]: $w_i = \frac{1}{n}$ and $x_i$ realization of multivariate
     random variable $X_i \stackrel{iid}{\sim} X$ where $X$ has $p(\cdot)$ as probability
     distribution.
-    \item \textbf{Kernel herding}:
-    \item \textbf{Quasi-Monte Carlo}:
-  \end{itemize}
+    \item [Kernel herding]:
+    \item [Quasi-Monte Carlo]:
 
-  In the \textbf{Frank-Wolfe Bayesian Quadrature}, we have
-  \begin{itemize}[font= \color{blue} \large, label= \ding{43}]
-\item $\acc{w_i}$ which appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ}),
-\item $\acc{x_i}$ selected by the Frank-Wolfe algorithm in order to minimize a posterior variance (described in section \ref{sec:FW}).
-  \end{itemize}
 
+  \item [Frank-Wolfe Bayesian Quadrature]:
+  \begin{myitemize}[0.2cm]
+\item $\acc{w_i}$ appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ}),
+\item $\acc{x_i}$ are selected by the Frank-Wolfe algorithm in order to minimize a posterior variance (described in section \ref{sec:FW}).
+\end{myitemize}
+  \end{mydescription}
   The main interest of the method developed in \cite{FWBQ} is the super fast
   \textit{exponential} convergence to the true value of the integral compared to the other methods mentioned above.\\
 
+\noindent
   Through this report, we will detail every results from \cite{FWBQ} with the goal
   to clarify and explain details that could have been omitted intentionally or not and which, in our view, make the Briol's and al. approach more natural, intuitive and easier
   to understand.
   % use Bach presentation for convergence rates benchmark
 
 \section{Background}
-% write properly the RKHS
 % write $\mu_p$ with an integral
-% MMD formula
 %WHY RKHS, WHY so USEFUL ?
 Let $\X \subseteq \R ^ { d }$ be a measurable space, $\mu$ a measure on $\X$ such
 that $p = \frac{\d \mu}{ \d \lambda}$ where $\lambda$ denotes the Lebesgue measure on $\X$,
@@ -94,7 +93,7 @@ We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to me
      \item \textbf{For all $f$ in $\H$, we have $p[f] = \bigps{f}{\mu_p}$.} By using
      the dirac delta function, the continuity of the inner product and viewing integral
      as a limit of a sum, we get
-     \begin{boxitemize}
+     \begin{boxcomputation}
      \begin{align*}
        p[f] &= \int_{\X} f(x) \d \mu(x)\\
        &= \int_{\X} \delta_x[f]  \d \mu(x)\\
@@ -102,9 +101,9 @@ We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to me
        &=  \bigps{f}{\int_{\X} \Phi(x) \d \mu(x)} \\
        &= \bigps{f}{\mu_p}
      \end{align*}
-      \end{boxitemize}
+      \end{boxcomputation}
      \item \textbf{For all $f$ in $\H$, we have $\p[f] = \bigps{f}{\mu_{\p}}$.}
-     \begin{boxitemize}
+     \begin{boxcomputation}
      \begin{align*}
        \p[f] &= \sum_{i=1}^n w_i f(x_i)\\
        &= \sum_{i=1}^n w_i \delta_{x_i}[f]\\
@@ -112,16 +111,16 @@ We will use the \textit{maximum mean discrepancy} (MMD) as our main metric to me
        &=  \bigps{f}{\sum_{i=1}^n w_i \Phi(x_i)} \\
        &= \bigps{f}{\mu_{\p}}
      \end{align*}
-   \end{boxitemize}
+   \end{boxcomputation}
 \item By using previous results and the Cauchy-schwartz inequality, we get :
-\begin{boxitemize}
+\begin{boxcomputation}
 \begin{align*}
 \MMD &= \sup _ { f \in \H : \norme{f} = 1 } \abs{
 \bigps{f}{\mu_{p}-\mu_{\p}} }\\
 &\leq \sup _ { f \in \H : \norme{f} = 1 } \norme{f} \norme{\mu_{p}-\mu_{\p}}\\
 &= \norme{\mu_{p}-\mu_{\p}}
 \end{align*}
- \end{boxitemize}
+ \end{boxcomputation}
 with equality if and only if $f$ and  $\mu_{p}-\mu_{\p}$ are linearly dependent.
 We deduce the desired result by taking $ \displaystyle f = \frac{1}{\norme{\mu_{p}-\mu_{\p}}}\prt{\mu_{p}-\mu_{\p}}$.
 
@@ -152,14 +151,14 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
 
 
   By switching integrals using Fubini's theorem, we get
-  \begin{boxitemize}
+  \begin{boxcomputation}
     \begin{align*}
       \Expec{p[f]} &= \int_{\Omega} p[f](w) \d \P(w)\\
       &= \int_{\Omega} \int_{\X} f(x,w) \d \mu(x)  \d \P(w)\\
       &= \int_{\X} \underbrace{\int_{\Omega}  f(x,w) \d \P(w)}_{\Expec{f(x)}=0} \d \mu(x)  =0
     \end{align*}
-\end{boxitemize}
-\begin{boxitemize}
+\end{boxcomputation}
+\begin{boxcomputation}
   \begin{align*}
       \Var{p[f]} &= \Expec{p[f]^2} = \int_{\Omega} p[f](w)^2 \d \P(w)\\
       &=\int_{\Omega} \prt{\int_{\X} f(x,w) \d \mu(x)}^2 \d \P(w)\\
@@ -167,7 +166,7 @@ A useful property is that $p[f]$ is a gaussian variable and then completely defi
       &= \int_{\X^2} \underbrace{\int_{\Omega}  f(x,w)f(y,w) \d \P(w)}_{=\Cov{f(x)}{f(y)} = k(x,y)} \d \mu(x) \d \mu(y) \\
       &= \int_{\X^2}  k(x,y) \d \mu(x) \d \mu(y)
     \end{align*}
-\end{boxitemize}
+\end{boxcomputation}
 
 Assume that samples $\acc{x_i}$ and $\acc{f_i} := \acc{f(x_i)}$ are given for $i=1$ to $n$ and denote by $K:= \prt{k(x_i, x_j)}_{1 \leq i,j \leq n}$. A natural question arises: how to update the weights $\acc{w_i}_{i=1}^n $?
 
@@ -204,7 +203,7 @@ where
 \end{boxdefinition}
 
 Let's determine what $\mu$ and $\Stilde$ look like in our context.
-  \begin{boxitemize}
+  \begin{boxcomputation}
 \begin{align*}
   \Sigma _ { 22 } &= \prt{\Cov{f_i}{f_j}}_{1 \leq i,j \leq n}\\
   &= \prt{\Cov{f(x_i)}{f(x_j)}}_{1 \leq i,j \leq n}\\
@@ -214,9 +213,9 @@ Let's determine what $\mu$ and $\Stilde$ look like in our context.
     \Cov{p[f]}{f_1} \\ \ldots \\ \Cov{p[f]}{f_n}\\
 \end{pmatrix} K^{-1} \mathbf{f}
 \end{align*}
-\end{boxitemize}
+\end{boxcomputation}
 Let's rewrite the vector from the left:
-\begin{boxitemize}
+\begin{boxcomputation}
 \begin{align*}
 \Cov{p[f]}{f_i} &= \int_{\Omega} p[f](w) f(x_i, w) \d \P(w)\\
 &= \int_{\Omega} \int_{\X} f(x, w) \d \mu(x) f(x_i, w) \d \P(w)\\
@@ -226,7 +225,7 @@ Let's rewrite the vector from the left:
 &= p[\Phi(x_i)]\\
 &= \mu_p \prt{x_i}\\
 \end{align*}
-\end{boxitemize}
+\end{boxcomputation}
 
 By denoting $z := \prt{z_i}_{i=1}^n = \prt{\mu_p \prt{x_i}}_{i=1}^n \in \R^n$, we
  get the desired formula\footnote{formula 4 in \cite{FWBQ} } for the expectation:
@@ -244,15 +243,15 @@ The variance is then straightforward :
   \end{align*}
 \end{boxexample}
 
-\begin{boxitemize}
+\begin{boxcomputation}
   We need to simplify the integral to obtain the desired formula for the variance:
 \begin{align*}
   \int_{\X^2}  k(x,y) \d \mu(x) \d \mu(y) &= \int_{\X} \int_{\X} \Phi(x)(y) \d \mu(y) \d \mu(x) \\
   &= \int_{\X} p[\Phi(x)] \d \mu(x) \\
   &= \int_{\X} \mu_p\prt{x} \d \mu(x) \\
-  &=  p[\mu_p] - z ^ { T } K ^ { - 1 } z
+  &=  p[\mu_p]
 \end{align*}
-\end{boxitemize}
+\end{boxcomputation}
 which leads us to the desired result:
 \begin{boxtheorem}
   $$\Stilde = p[\mu_p] -z ^ { T } K ^ { - 1 } z$$
@@ -275,6 +274,13 @@ Both the conditional expectation and variance are essentials in the FWBQ\footnot
 
 \section{Frank-Wolfe algorithm}
 \label{sec:FW}
+
+\begin{mydescription}
+  \item [Bananas] yellow and banana shaped
+  \item [Apples] red and round
+  \item [Oranges] orange and round
+  \item [Lemons] yellow, kinda round
+\end{mydescription}
 
 % intuition
 % graph to show that it is closed to a gradient descent
