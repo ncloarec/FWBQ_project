@@ -353,12 +353,12 @@ Let's denote as \cite{FWBQ}
   In equation \eqref{eq:gbar}, we don't have necessarily $\overline{g_i} \in \spn{\nabla g_{i-1}}$. In fact, we can clearly see in the illustration above
    that the point
    \begin{align*}
-  \tilde { g } _ { i } &:= \arg \min _ { g \in \G\cap  \spn{\nabla g_{i-1}}} \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)} \\
+  \widetilde { g } _ { i } &:= \arg \min _ { g \in \G\cap  \spn{\nabla g_{i-1}}} \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)} \\
   &= \arg \min _ { \alpha \geq 0}
   \acc{-\alpha \nabla g_{i-1} \mid \alpha \nabla g_{i-1} \in \G}
 \end{align*}
 would not be optimal as $\inner{\overline { g } _ { i }}{\nabla g_{i-1}}
-< \inner{\tilde { g } _ { i }}{\nabla g_{i-1}}$.
+< \inner{\widetilde { g } _ { i }}{\nabla g_{i-1}}$.
 
 
 % \hspace{-1.5cm}
@@ -377,9 +377,9 @@ would not be optimal as $\inner{\overline { g } _ { i }}{\nabla g_{i-1}}
   \node[draw] at (-3.02,0.3)  (grad1) {$\mathbf{\nabla J(g_1)}$};
   \node[draw] at (-4.22,-2.3)  (grad2) {$\mathbf{\nabla J(g_2)}$};
 \draw [fill=blue] (-4.42,-0.94) circle (2pt) node[below] {$\mathbf{g_1}$};
-\draw [fill=blue] (-7.294,-2.47) circle (2pt) node[shift={(-1.5ex,-1.5ex)}] {$\mathbf{\overline{g_2}}$};
+\draw [fill=blue] (-7.294,-2.47) circle (2pt) node[shift={(-1.5ex,-1.5ex)}] {$\mathbf{\widetilde{g_2}}$};
 \draw [fill=blue] (-5.41,-1.47) circle (2pt) node[shift={(0ex,-2.5ex)}] {$\mathbf{g_2}$};
-\draw [fill=blue] (-7.10,-0.846) circle (2pt) node[shift={(-1.5ex,1.5ex)}] {$\mathbf{\overline{g_3}}$};
+\draw [fill=blue] (-7.10,-0.846) circle (2pt) node[shift={(-1.5ex,1.5ex)}] {$\mathbf{\widetilde{g_3}}$};
 \draw [fill=blue] (-6.01,-1.246) circle (2pt) node[shift={(0ex,2.5ex)}] {$\mathbf{g_3}$};
 \draw[->,ggred, looseness=2] (-4.42,-0.94) .. controls (0,-2.3) and  (-4,-4.5) .. node[sloped] {} (-7.29,-2.47);
 \draw[->,ggred] (-7.29,-2.47) -- (-5.41,-1.47);
