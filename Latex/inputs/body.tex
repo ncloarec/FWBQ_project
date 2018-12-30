@@ -350,11 +350,16 @@ Let's denote as \cite{FWBQ}
 \begin{center}
   \textbf{An illustration of the Frank Wolfe algorithm. }
 \end{center}
- Some remarks :
-\begin{myitemize}
-  \item In equation \eqref{eq:gbar}, we don't have necessarily $\overline{g_i} \in \spn{\nabla g_{i-1}}$
+  In equation \eqref{eq:gbar}, we don't have necessarily $\overline{g_i} \in \spn{\nabla g_{i-1}}$. In fact, we can clearly see in the illustration above
+   that the point
+   \begin{align*}
+  \tilde { g } _ { i } &:= \arg \min _ { g \in \G\cap  \spn{\nabla g_{i-1}}} \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)} \\
+  &= \arg \min _ { \alpha \geq 0}
+  \acc{-\alpha \nabla g_{i-1} \mid \alpha \nabla g_{i-1} \in \G}
+\end{align*}
+would not be optimal as $\inner{\overline { g } _ { i }}{\nabla g_{i-1}}
+< \inner{\tilde { g } _ { i }}{\nabla g_{i-1}}$.
 
-\end{myitemize}
 
 % \hspace{-1.5cm}
 \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
