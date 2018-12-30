@@ -173,7 +173,7 @@ Assume that samples $\acc{x_i}$ and $\acc{f_i} := \acc{f(x_i)}$ are given for $i
 \begin{figure}[H]
 \centering
 \includegraphics[scale=.33]{bq.png}
-\caption{An illustration of Bayesian Quadrature.\\\textit{Source:} \cite{huszar}}
+\caption{\textbf{An illustration of Bayesian Quadrature.}\\\textit{Source:} \cite{huszar}}
 \label{fig:bq}
 \end{figure}
 
@@ -276,7 +276,7 @@ Both the conditional expectation and variance are essentials in the FWBQ\footnot
 \label{sec:FW}
 
 Let's $J$ be a convex differentiable real-valued function on a
-domain $\G$ which is supposed to be a compact and convex space of functions.
+domain $\G\subset\H$ which is supposed to be a compact and convex.
 
 The Frank-Wolfe algorithm \cite{fwalgo} proposes a method to solve the following optimization
  problem :
@@ -286,23 +286,75 @@ The Frank-Wolfe algorithm \cite{fwalgo} proposes a method to solve the following
     \begin{array} { l } { \text { Minimize } \acc{J ( \mathbf { x } )} } \\ { \text { subject to } \mathbf { x } \in \G } \end{array}
   \end{equation}
 \end{boxproblem}
+Let's describe here both the Frank-Wolfe algorithm and its variant with the Line Search :
 \begin{boxprogramming}
 \begin{mydescription}
   \item [Initialization] $g _ { 1 } = \overline { g } _ { 1 } \in \mathcal { G }$ and
-  step-size sequence $\acc{\rho_i}_{i=1}^n$.
-  \item [Iteration] For $i=2$ to $n$
-  \begin{mydescription}[0.5cm]
+  step-size sequence $\acc{\rho_i}_{i=1}^n$ (not required in the FWLS algorithm).
+  \item [Iterations] For $i=2$ to $n$ :
+  \begin{mydescription}[0.2cm]
     \item [Search direction] we replace in \eqref{eq:fwpbm} $J$ by its first-order
     Taylor expansion around $g_k$ to solve the following subproblem
     \begin{boxcomputation}
-      \begin{equation}
-        \begin{array} { c } { \text { minimize }  \acc{J \left( g _ { k } \right) + \nabla J \left( g _ { k } \right) ^ { \mathrm { T } } \left( g - g _ { k } \right)} } \\ { \text { subject to } g \in \G } \end{array}
+      \begin{equation}\label{eq:fwlin}
+        \begin{array} { c } { \text { minimize }  \acc{J \left( g_{i-1} \right) + \nabla J \left( g_{i-1} \right) ^ { \mathrm { T } } \left( g - g_{i-1} \right)} } \\ { \text { subject to } g \in \G } \end{array}
       \end{equation}
     \end{boxcomputation}
+Let's denote as \cite{FWBQ}
+\begin{equation}\label{eq:gbar}
+  \overline { g } _ { i } := \arg \min _ { g \in \G } \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)}
+\end{equation}
+ where we have removed
+ in \eqref{eq:fwlin} terms independent of the optimization variable.
+ \item [New iteration point]: we choose $g_i$ as a \textit{convex}-combination of
+ $g_{i-1}$ and $\overline{g_i}$.
+ \begin{equation}
+   g _ { i } = \left( 1 - \rho _ { i } \right) g _ { i - 1 } + \rho _ { i } \overline{ g } _ { i }
+ \end{equation}
+ \begin{mydescription}
+\item [FW] $\rho _ { i }$ is  determined by the sequence given at the initialization
+\item [FWLS]
+\begin{equation*}
+\rho _ { i } := \operatorname { argmin } _ { \rho \in [ 0,1 ] } J \left( ( 1 - \rho ) g _ { i - 1 } + \rho \overline{g _ { i }} \right)
+\end{equation*}
 
+ \end{mydescription}
   \end{mydescription}
 \end{mydescription}
 \end{boxprogramming}
+
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\clip(-9,-4) rectangle (0.24,2);
+\fill[line width=2pt,color=ggyellow,fill=ggyellow,fill opacity=0.10000000149011612] (-5.58,1.24) -- (-3.52,1.34) -- (-1.08,-1.24) -- (-4.38,-3.46) -- (-8.1,-2.2) -- cycle;
+\draw [color=ggyellow] (-5.58,1.24)-- (-3.52,1.34);
+\draw [color=ggyellow] (-3.52,1.34)-- (-1.08,-1.24);
+\draw [color=ggyellow] (-1.08,-1.24)-- (-4.38,-3.46);
+\draw [color=ggyellow] (-4.38,-3.46)-- (-8.1,-2.2);
+\draw [color=ggyellow] (-8.1,-2.2)-- (-5.58,1.24);
+\draw [->] (-4.42,-0.94) -- (-3.02,-0.1);
+\draw [dotted] (-4.42,-0.94)-- (-7.29,-2.47);
+\draw [dotted] (-4.42,-0.94)-- (-8.1,-2.2);
+\draw [->] (-5.73,-1.38) -- (-4.42,-1.84);
+\draw [dotted] (-5.41,-1.47)-- (-7.10,-0.84);
+  \node[draw] at (-3.02,0.3)  (grad1) {$\mathbf{\nabla J(g_1)}$};
+  \node[draw] at (-4.22,-2.3)  (grad2) {$\mathbf{\nabla J(g_2)}$};
+\draw [fill=blue] (-4.42,-0.94) circle (2pt) node[below] {$\mathbf{g_1}$};
+\draw [fill=blue] (-8.1,-2.2) circle (2pt) node[shift={(-1.5ex,-2ex)}] {$\mathbf{\overline{g_2}=\overline{g_3}}$};
+\draw [fill=blue] (-5.73,-1.38) circle (2pt) node[shift={(0ex,-2.5ex)}] {$\mathbf{g_2}$};
+\draw [fill=blue] (-6.32,-1.59) circle (2pt) node[shift={(-0.5ex,2ex)}] {$\mathbf{g_3}$};
+\draw[->,ggred, looseness=2] (-4.42,-0.94) .. controls (0,-2.3) and  (-4,-4.5) .. node[sloped] {} (-8.1,-2.2);
+\draw[->,ggred] (-8.1,-2.2) -- (-5.73,-1.38);
+\draw[->,ggred, looseness=2] (-5.73,-1.38) .. controls (-5.6,0.5) .. node[sloped] {} (-8.1,-2.2);
+\draw[->,ggred] (-8.1,-2.2) -- (-6.32,-1.59);
+\end{tikzpicture}
+\begin{center}
+  \textbf{An illustration of the Frank Wolfe algorithm. }
+\end{center}
+ Some remarks :
+\begin{myitemize}
+  \item In equation \eqref{eq:gbar}, we don't have necessarily $\overline{g_i} \in \spn{\nabla g_{i-1}}$
+
+\end{myitemize}
 
 % \hspace{-1.5cm}
 \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
@@ -330,7 +382,7 @@ The Frank-Wolfe algorithm \cite{fwalgo} proposes a method to solve the following
 \draw[->,ggred] (-7.10,-0.846) -- (-6.01,-1.246);
 \end{tikzpicture}
 \begin{center}
-  \textbf{An illustration of the Frank-Wolfe algorithm.}
+  \textbf{Comparison with a descent algorithm. }
 \end{center}
 
 
