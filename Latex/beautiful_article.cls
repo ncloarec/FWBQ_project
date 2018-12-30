@@ -288,7 +288,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
 \abovedisplayskip=0pt
 \begin{tcolorbox}
 [enhanced jigsaw,breakable,pad at break*=1mm,
- colback=myorange!25,boxrule=0pt,frame hidden]}
+ colback=tsorange!25,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
 \newenvironment{boxprogramming}
@@ -307,8 +307,8 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{cover}}}
  colback=tsgrey!20,boxrule=0pt,frame hidden]}
 {\end{tcolorbox}}
 
-\newenvironment{mydescription}
-{\begin{description}[font=$\bullet$~\normalfont\bfseries\color{myorange!90!black}]}
+\newenvironment{mydescription}[1][0cm]
+{\begin{description}[font=$\bullet$~\normalfont\bfseries\color{myorange!90!black}, leftmargin=#1]}
 {\end{description}}
 
 \newenvironment{myitemize}[1][.5cm]

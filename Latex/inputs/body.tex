@@ -275,8 +275,38 @@ Both the conditional expectation and variance are essentials in the FWBQ\footnot
 \section{Frank-Wolfe algorithm}
 \label{sec:FW}
 
+Let's $J$ be a convex differentiable real-valued function on a
+domain $\G$ which is supposed to be a compact and convex space of functions.
+
+The Frank-Wolfe algorithm \cite{fwalgo} proposes a method to solve the following optimization
+ problem :
+
+\begin{boxproblem}
+  \begin{equation} \label{eq:fwpbm}
+    \begin{array} { l } { \text { Minimize } \acc{J ( \mathbf { x } )} } \\ { \text { subject to } \mathbf { x } \in \G } \end{array}
+  \end{equation}
+\end{boxproblem}
+\begin{boxprogramming}
+\begin{mydescription}
+  \item [Initialization] $g _ { 1 } = \overline { g } _ { 1 } \in \mathcal { G }$ and
+  step-size sequence $\acc{\rho_i}_{i=1}^n$.
+  \item [Iteration] For $i=2$ to $n$
+  \begin{mydescription}[0.5cm]
+    \item [Search direction] we replace in \eqref{eq:fwpbm} $J$ by its first-order
+    Taylor expansion around $g_k$ to solve the following subproblem
+    \begin{boxcomputation}
+      \begin{equation}
+        \begin{array} { c } { \text { minimize }  \acc{J \left( g _ { k } \right) + \nabla J \left( g _ { k } \right) ^ { \mathrm { T } } \left( g - g _ { k } \right)} } \\ { \text { subject to } g \in \G } \end{array}
+      \end{equation}
+    \end{boxcomputation}
+
+  \end{mydescription}
+\end{mydescription}
+\end{boxprogramming}
+
+% \hspace{-1.5cm}
 \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
-\clip(-10.24,-6.28) rectangle (0.24,2);
+\clip(-9,-4) rectangle (0.24,2);
 \fill[line width=2pt,color=ggyellow,fill=ggyellow,fill opacity=0.10000000149011612] (-5.58,1.24) -- (-3.52,1.34) -- (-1.08,-1.24) -- (-4.38,-3.46) -- (-8.1,-2.2) -- cycle;
 \draw [color=ggyellow] (-5.58,1.24)-- (-3.52,1.34);
 \draw [color=ggyellow] (-3.52,1.34)-- (-1.08,-1.24);
@@ -299,7 +329,9 @@ Both the conditional expectation and variance are essentials in the FWBQ\footnot
 \draw[->,ggred, looseness=2] (-5.41,-1.47) .. controls (-5.6,0.5) .. node[sloped] {} (-7.10,-0.846);
 \draw[->,ggred] (-7.10,-0.846) -- (-6.01,-1.246);
 \end{tikzpicture}
-% \caption{An illustration of the Frank-Wolfe algorithm.} \label{fig:FW}
+\begin{center}
+  \textbf{An illustration of the Frank-Wolfe algorithm.}
+\end{center}
 
 
 
