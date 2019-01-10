@@ -390,7 +390,22 @@ would not be optimal as $\inner{\overline { g } _ { i }}{\nabla g_{i-1}}
   \textbf{Comparison with a descent algorithm. }
 \end{center}
 
+\section{Consistency and Contraction}
+\label{sec:CC}
 
+\section{Experimental Results}
+\label{sec:ER}
+
+\subsection{Overview of the code}
+
+We have implemented the following algorithms : -- FW and FWBQ (when Line-Search mode is disabled) -- FWLS and FWLSBQ (when Line-Search mode is enabled). Two notebooks are available. The first notebook applies the different algorithms to a simulation study. The second notebook is an example of how the algorithms can be used to solve a problem in a specific area.
+
+\subsection{Simulation Study}
+
+We also used an exponentiated-quadratic (EQ) kernel $k(x, x') := \lambda^{2} exp(-\frac{1}{2}\sigma^{2} \| x-x' \|_{2}^{2} )$. EQ kernel is a relevant choice when $p$ is a mixture of gaussians. Moreover, the mean element $\mu_{p}$ has a closed-form expression.
+In order to replicate the simulation study of the paper, we took $p$ as a mixture of 20 two-dimensional gaussians. Two dimensions for each gaussians allow us to plot selected points, the function $f$, the approximation of the mean element $g_n$ and the mean element $\mu_{p}$ so that we can come up with a visual representation of the algorithms.
+
+\subsection{An example of application}
 
 % intuition
 % graph to show that it is closed to a gradient descent
