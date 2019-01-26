@@ -443,11 +443,51 @@ Let's prove \eqref{eq:13} by induction.
 \end{mydescription}
 \end{boxcomputation}
 
-It is common to take the harmonic coefficients as a choice for $\acc{\rho_i}_{i=1}^n$,
- which gives us  :
- \begin{equation*}
-   
- \end{equation*}
+It is common to take harmonic coefficients in the standard FW algorithm\footnote{Let's remember that in the FWLS algorithm, $\acc{\rho_i}$ and thus $\acc{w_k^{FWLS}}$ are
+determind by the line search step.} as a choice for $\acc{\rho_i}:= \acc{\frac{1}{i}}_{i=1}^n$,
+ which gives us uniform weights as showed bellow :
+ \begin{align*}
+w_k^{FW} &= \frac{1}{k} \acc{\prod_{k<i\leq n} \prt{1-\frac{1}{i}}}= \frac{1}{k} \cdot \frac{k}{n} = \frac{1}{n}.
+\end{align*}
+
+Let's set here the framework of our optimization problem.
+
+\begin{boxproblem}
+  We want to approximate the mean element $\mu_p$ with a linear combination of
+  elements of the form :$$\Phi(x)= k\prt{\cdot\;,\; x}.$$
+  In fact, let's say we have:
+   $$\mu_p \approx \hat{\mu_p} := \sum_{k=1}^n w_k \Phi(x_k).$$
+   Using the reproducing property, we will then have :
+   $$\hat{p}[f]= \bigps{f}{\mu_p} = \sum_{k=1}^n w_k f(x_k),$$
+   which is a quadrature rule.
+
+   In order to do this, let's assume that we optimize the following convex function :
+   \begin{equation}
+     J(g):= \frac{1}{2} \norme{g-\mu_p}^2
+   \end{equation}
+on the domain $\G \subseteq \H$ where $\G$ refers to the closure of the convex hull
+of $\Phi\prt{\X}$, which is assumed to be uniformly bounded, \ie
+\begin{equation*}
+  \exists R > 0 : \forall x \in \mathcal { X } , \| \Phi ( x ) \| _ { \mathcal { H } } \leq R
+\end{equation*}
+
+\end{boxproblem}
+But a question rises : Why atoms $g_i$ should be of the form $\Phi(x_i)$?
+
+In fact, let's
+ $g$ be a point in the domain. Because of its definition,
+  $g$ can simply be expressed as a convex combination of elements in the feature space $\Phi(\X)$, \ie $g = \sum_k \alpha_k \Phi(x_k)$ and thus we have :
+ \begin{align*}
+   \bigps{g}{\grad{J}(g_{i-1})} &= \sum_k \alpha_k \cdot \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
+   &\geq \prt{\sum_k \alpha_k} \cdot \min_{k} \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
+   &= \bigps{\Phi(x_{k_0})}{\grad{J}(g_{i-1})}
+ \end{align*}
+ for $k_0$ such that $k_0 \in \argmin{\bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}}$.
+
+ We now understand how can the Frank Wolfe algorithm be useful here : because the
+ minimization of \eqref{eq:gbar} can be restricted at extreme points of the domain,
+ selecting atoms of the form $\Phi(x_k)$ allow us to select interesting points $\acc{x_k}$ which are needed in the quadrature rule. 
+
 
 \section{Consistency and Contraction}
 \label{sec:CC}
