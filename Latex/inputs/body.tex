@@ -476,7 +476,7 @@ But a question rises : Why atoms $g_i$ should be of the form $\Phi(x_i)$?
 
 In fact, let's
  $g$ be a point in the domain. Because of its definition,
-  $g$ can simply be expressed as a convex combination of elements in the feature space $\Phi(\X)$, \ie $g = \sum_k \alpha_k \Phi(x_k)$ and thus we have :
+  $g$ can simply be expressed as a convex combination of elements in the feature space $\Phi(\X)$, \ie $g = \sum_k \alpha_k \Phi(x_k)$ with $\sum_k \alpha_k=1$ and thus we have :
  \begin{align*}
    \bigps{g}{\grad{J}(g_{i-1})} &= \sum_k \alpha_k \cdot \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
    &\geq \prt{\sum_k \alpha_k} \cdot \min_{k} \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
@@ -486,8 +486,36 @@ In fact, let's
 
  We now understand how can the Frank Wolfe algorithm be useful here : because the
  minimization of \eqref{eq:gbar} can be restricted at extreme points of the domain,
- selecting atoms of the form $\Phi(x_k)$ allow us to select interesting points $\acc{x_k}$ which are needed in the quadrature rule. 
+ selecting atoms of the form $\Phi(x_k)$ allow us to select interesting points $\acc{x_k}$ which are needed for the bayesian quadrature which are solution of the
+ following optimization problem :
+ \begin{equation}
+   x_k \in \arg \min _ { x \in \mathcal { X } } \left\langle \Phi ( x ) , g _ { k - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } }
+ \end{equation}
+ where $g \in \G$ in the left term of the inner product has been replaced by $\Phi(x) \in \G$ with $x \in \X$.
 
+ Therefore, if we denote by $\acc{w_l}_{l=1}^{i-1}$ the coefficients in front of
+ $\acc{\Phi(x_l)}_{l=1}^{i-1}$ in $g_{i-1}$ and using the reproducing kernel property, we have :
+ \begin{align*}
+   \left\langle \Phi ( x ) , g _ { i - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } } &= \left\langle \Phi ( x ) , \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } \Phi \left( x _ { l } \right) - \mu _ { p } \right\rangle _ { \mathcal { H } }\\
+   &= \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } k \left( x , x _ { l } \right) - \mu _ { p } ( x )\\
+ \end{align*}
+which gives an explicit formula for the optimization problem\footnote{We remark that if
+ the optimization problem on $g \in \G$ was a classic convex problem, this is not the case anymore when we perform the optimization on $x \in \X$.} with known quantities.
+ In fact, in the simulations that we have been able to reproduce successfully, the choice of a gaussian kernel $k$ allow us to compute $\mu_p( \cdot )$ easily. See \cite{FWBQ} \textit{Appendix C} for more details. 
+ \section{The Frank-Wolfe Bayesian Quadrature algorithm}
+ \label{sec:CC}
+
+We describe here the final algorithm which is a combination of the two previous
+ ones.
+    At each iteration \texttt{i}:
+ \begin{mydescription}
+   \item [Selecting a new $x_i$] through the Frank Wolfe algorithm with $g_{i-1}$ depending
+   on the BQ weights of the iteration \texttt{i-1} and FW design points of all previous iteration \texttt{j} with $1 \leq j<i$.
+   \item [Selecting new weights $\acc{w_k^{BQ}}_{k=1}^i$] with the bayesian quadrature.
+ \end{mydescription}
+
+ It's important to note that weights at each iteration \texttt{i} are used only for
+ the next iteration \texttt{i+1} while the design points $x_i$ are used for all iteration \texttt{j} with $i<j\leq n$.
 
 \section{Consistency and Contraction}
 \label{sec:CC}
