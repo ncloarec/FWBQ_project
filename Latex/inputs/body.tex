@@ -309,6 +309,7 @@ Let's denote as \cite{FWBQ}
  \item [New iteration point]: we choose $g_i$ as a \textit{convex}-combination of
  $g_{i-1}$ and $\overline{g_i}$.
  \begin{equation}
+   \label{eq:12}
    g _ { i } = \left( 1 - \rho _ { i } \right) g _ { i - 1 } + \rho _ { i } \overline{ g } _ { i }
  \end{equation}
  \begin{mydescription}
@@ -350,15 +351,19 @@ Let's denote as \cite{FWBQ}
 \begin{center}
   \textbf{An illustration of the Frank Wolfe algorithm. }
 \end{center}
-  In equation \eqref{eq:gbar}, we don't have necessarily $\overline{g_i} \in \spn{\nabla g_{i-1}}$. In fact, we can clearly see in the illustration above
+  In equation \eqref{eq:gbar}, we don't have necessarily $\overline{g_i} \in \spn{\nabla J(g_{i-1})}$. In fact, we can clearly see in the illustration above
    that the point
    \begin{align*}
-  \widetilde { g } _ { i } &:= \arg \min _ { g \in \G\cap  \spn{\nabla g_{i-1}}} \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)} \\
+  \widetilde { g } _ { i } &:= \arg \min _ { g \in \G\cap  \spn{\nabla J(g_{i-1})}} \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)} \\
   &= \arg \min _ { \alpha \geq 0}
-  \acc{-\alpha \nabla g_{i-1} \mid \alpha \nabla g_{i-1} \in \G}
+  \acc{-\alpha \nabla J(g_{i-1}) \mid \alpha \nabla J(g_{i-1}) \in \G}
 \end{align*}
-would not be optimal as $\inner{\overline { g } _ { i }}{\nabla g_{i-1}}
-< \inner{\widetilde { g } _ { i }}{\nabla g_{i-1}}$.
+would not be optimal as
+\begin{equation*}
+  \inner{\overline { g } _ { i }}{\nabla J(g_{i-1})}
+  < \inner{\widetilde { g } _ { i }}{\nabla J(g_{i-1})}.
+\end{equation*}
+
 
 
 % \hspace{-1.5cm}
@@ -389,6 +394,128 @@ would not be optimal as $\inner{\overline { g } _ { i }}{\nabla g_{i-1}}
 \begin{center}
   \textbf{Comparison with a descent algorithm. }
 \end{center}
+
+Another important fact of the Frank Wolfe algorithm is that the output $g_n$
+can easily be expressed as a linear combination of atoms $\overline{g_i}$.
+
+In fact we have the following formula, which corresponds to the equation (\textcolor{electriccrimson}{7}) in \cite{FWBQ}:
+\begin{boxtheorem}
+  For all $n \geq 2$ :
+  \begin{equation}
+    \label{eq:13}
+    g_n = \sum_{k=1}^n \underbrace{ \rho_k \acc{\prod_{k<i\leq n} (1-\rho_i)} }_{:=w_k^{FW}} \cdot \overline{g_k} = \sum_{k=1}^n w_k^{FW}\cdot \overline{g_k}
+  \end{equation}
+  with $\rho_1 = 1$.
+\end{boxtheorem}
+
+The formula in \cite{FWBQ} is slightly different :
+\begin{equation*}
+  g _ { n } = \sum _ { i = 1 } ^ { n } \rho _ { i - 1 }\acc{ \prod _ { j = i + 1 } ^ { n } \left( 1 - \rho _ { j - 1 } \right) } \cdot \overline { g } _ { i }
+\end{equation*}
+with $\rho_0=1$ but clearly doesn't work. In fact according to the algorithm, by taking $n=2$ we should have :
+\begin{equation*}
+  g_2 = (1-\rho_2) \cdot \overline{g_1} + \rho_2 \cdot \overline{g_2}
+\end{equation*}
+while their formula gives
+\begin{align*}
+  g _ { 2 } &= \sum _ { i = 1 } ^ { 2 } \rho _ { i - 1 }\acc{ \prod _ { j = i + 1 } ^ { 2 } \left( 1 - \rho _ { j - 1 } \right) } \overline { g } _ { i }\\
+  &= (1-\rho_1) \cdot  \overline{g_1}+\rho_1 \cdot \overline{g_2}.
+\end{align*}
+Let's prove \eqref{eq:13} by induction.
+
+\begin{boxcomputation}
+\begin{mydescription}
+  \item [Base case]: $n=2$. Our formula gives :
+  \begin{align*}
+    g_2 &= \sum_{k=1}^2  \rho_k \acc{\prod_{k<i\leq 2} (1-\rho_i)} \cdot \overline{g_k}\\
+    &= (1-\rho_2) \cdot \overline{g_1}+ \rho_2 \cdot \overline{g_2}
+  \end{align*}
+  as we have set $\rho_1 = 1$, as expected.
+  \item [Step case]: Assume the formula holds for $n-1$ and let's prove it for $n$.
+  Using the recurrence relation of \eqref{eq:12} and our assumption, we have :
+  \begin{align*}
+    g _ {n} &= \left( 1 - \rho _ {n} \right) \cdot g _ {n- 1 } + \rho _ {n} \cdot \overline { g } _ {n}\\
+    &= \left( 1 - \rho _ { n } \right) \cdot \sum_{k=1}^n \rho_k \acc{\prod_{k<i\leq n-1} (1-\rho_i)} \cdot \overline{g_k} + \rho_n \cdot \overline { g } _ {n}\\
+    &= \sum_{k=1}^n \rho_k \acc{\prod_{k<i\leq n} (1-\rho_i)} \cdot \overline{g_k} + \rho_n\cdot \overline { g } _ {n}\\
+    &= \sum_{k=1}^n \rho_k \acc{\prod_{k<i\leq n} (1-\rho_i)}  \cdot \overline{g_k}
+  \end{align*}
+  which ends the proof.
+\end{mydescription}
+\end{boxcomputation}
+
+It is common to take harmonic coefficients in the standard FW algorithm\footnote{Let's remember that in the FWLS algorithm, $\acc{\rho_i}$ and thus $\acc{w_k^{FWLS}}$ are
+determind by the line search step.} as a choice for $\acc{\rho_i}:= \acc{\frac{1}{i}}_{i=1}^n$,
+ which gives us uniform weights as showed bellow :
+ \begin{align*}
+w_k^{FW} &= \frac{1}{k} \acc{\prod_{k<i\leq n} \prt{1-\frac{1}{i}}}= \frac{1}{k} \cdot \frac{k}{n} = \frac{1}{n}.
+\end{align*}
+
+Let's set here the framework of our optimization problem.
+
+\begin{boxproblem}
+  We want to approximate the mean element $\mu_p$ with a linear combination of
+  elements of the form :$$\Phi(x)= k\prt{\cdot\;,\; x}.$$
+  In fact, let's say we have:
+   $$\mu_p \approx \hat{\mu_p} := \sum_{k=1}^n w_k \Phi(x_k).$$
+   Using the reproducing property, we will then have :
+   $$\hat{p}[f]= \bigps{f}{\mu_p} = \sum_{k=1}^n w_k f(x_k),$$
+   which is a quadrature rule.
+
+   In order to do this, let's assume that we optimize the following convex function :
+   \begin{equation}
+     J(g):= \frac{1}{2} \norme{g-\mu_p}^2
+   \end{equation}
+on the domain $\G \subseteq \H$ where $\G$ refers to the closure of the convex hull
+of $\Phi\prt{\X}$, which is assumed to be uniformly bounded, \ie
+\begin{equation*}
+  \exists R > 0 : \forall x \in \mathcal { X } , \| \Phi ( x ) \| _ { \mathcal { H } } \leq R
+\end{equation*}
+
+\end{boxproblem}
+But a question rises : Why atoms $g_i$ should be of the form $\Phi(x_i)$?
+
+In fact, let's
+ $g$ be a point in the domain. Because of its definition,
+  $g$ can simply be expressed as a convex combination of elements in the feature space $\Phi(\X)$, \ie $g = \sum_k \alpha_k \Phi(x_k)$ with $\sum_k \alpha_k=1$ and thus we have :
+ \begin{align*}
+   \bigps{g}{\grad{J}(g_{i-1})} &= \sum_k \alpha_k \cdot \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
+   &\geq \prt{\sum_k \alpha_k} \cdot \min_{k} \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
+   &= \bigps{\Phi(x_{k_0})}{\grad{J}(g_{i-1})}
+ \end{align*}
+ for $k_0$ such that $k_0 \in \argmin{\bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}}$.
+
+ We now understand how can the Frank Wolfe algorithm be useful here : because the
+ minimization of \eqref{eq:gbar} can be restricted at extreme points of the domain,
+ selecting atoms of the form $\Phi(x_k)$ allow us to select interesting points $\acc{x_k}$ which are needed for the bayesian quadrature which are solution of the
+ following optimization problem :
+ \begin{equation}
+   x_k \in \arg \min _ { x \in \mathcal { X } } \left\langle \Phi ( x ) , g _ { k - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } }
+ \end{equation}
+ where $g \in \G$ in the left term of the inner product has been replaced by $\Phi(x) \in \G$ with $x \in \X$.
+
+ Therefore, if we denote by $\acc{w_l}_{l=1}^{i-1}$ the coefficients in front of
+ $\acc{\Phi(x_l)}_{l=1}^{i-1}$ in $g_{i-1}$ and using the reproducing kernel property, we have :
+ \begin{align*}
+   \left\langle \Phi ( x ) , g _ { i - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } } &= \left\langle \Phi ( x ) , \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } \Phi \left( x _ { l } \right) - \mu _ { p } \right\rangle _ { \mathcal { H } }\\
+   &= \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } k \left( x , x _ { l } \right) - \mu _ { p } ( x )\\
+ \end{align*}
+which gives an explicit formula for the optimization problem\footnote{We remark that if
+ the optimization problem on $g \in \G$ was a classic convex problem, this is not the case anymore when we perform the optimization on $x \in \X$.} with known quantities.
+ In fact, in the simulations that we have been able to reproduce successfully, the choice of a gaussian kernel $k$ allow us to compute $\mu_p( \cdot )$ easily. See \cite{FWBQ} \textit{Appendix C} for more details. 
+ \section{The Frank-Wolfe Bayesian Quadrature algorithm}
+ \label{sec:CC}
+
+We describe here the final algorithm which is a combination of the two previous
+ ones.
+    At each iteration \texttt{i}:
+ \begin{mydescription}
+   \item [Selecting a new $x_i$] through the Frank Wolfe algorithm with $g_{i-1}$ depending
+   on the BQ weights of the iteration \texttt{i-1} and FW design points of all previous iteration \texttt{j} with $1 \leq j<i$.
+   \item [Selecting new weights $\acc{w_k^{BQ}}_{k=1}^i$] with the bayesian quadrature.
+ \end{mydescription}
+
+ It's important to note that weights at each iteration \texttt{i} are used only for
+ the next iteration \texttt{i+1} while the design points $x_i$ are used for all iteration \texttt{j} with $i<j\leq n$.
 
 \section{Consistency and Contraction}
 \label{sec:CC}
