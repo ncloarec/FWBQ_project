@@ -621,7 +621,11 @@ of elements of $\Phi(\X)$.}, we have
   &\geq 0
 \end{align*}
 so $\ropt \geq 0$.
-Using \eqref{eq:18}, we have $$\left\langle \mu _ { p } - g _ { i -1} , \mu _ { p } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \leq 0.$$
+Using \eqref{eq:18}, we have
+\begin{equation}
+  \label{eq:neg}
+  \left\langle \mu _ { p } - g _ { i -1} , \mu _ { p } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \leq 0.
+\end{equation}
 Thus
 \begin{align*}
   &\left\langle g _ { i - 1 } - \mu _ { p } , g _ { i - 1 } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \\&\quad =
@@ -640,15 +644,42 @@ which gives us $\ropt \leq 1$.
 \begin{equation}
   \norme{\mu_p-g_i}^2 \leq \prt{1-q^2}\cdot \norme{\mu_p-g_{i-1}}^2
 \end{equation}
-where $q^2 = ???$
+where $q = \frac{R}{D}>0$.
  \end{boxtheorem}
 
  \begin{boxcomputation}
-Using $g _ { i } = \left( 1 - \ropt \right) g _ { i - 1 } + \ropt \overline { g } _ { i }$ and the fact that $J$ is equal to its quadratic approximation, we have :
+Using \eqref{eq:12} and the fact that $J$ is equal to its quadratic approximation, we have :
 \begin{align*}
   \norme{\mu_p-g_i}^2
   &= \left( \ropt \right) ^ { 2 } \left\| \overline{g_i}-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } \\&+ 2 \ropt \left\langle \mu_p-g_{i-1} , g_{i-1}-\overline{g_i} \right\rangle_{ \mathscr { H }} \\&+ \left\| \mu_p-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 }
 \end{align*}
+Substituting the value of $\ropt$ from step 2 yields to :
+\begin{align*}
+&\left\| \mu_p-g_i \right\|_{ \mathscr { H }} ^ { 2 } \\ &\qquad= \frac { \left\| \mu_p-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } \left\| \mu_p-\overline{g_i} \right\|_{ \mathscr { H }} ^ { 2 } - \left\langle \mu_p-g_i , \mu_p-\overline{g_i} \right\rangle_{ \mathscr { H }} ^ { 2 } } { \left\| \overline{g_i}-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } }
+\end{align*}
+We will need the two following inequalities in this third step:
+\begin{align}
+  \norme{\mu_p-\overline{g_i}}^2 &\leq \norme{\overline{g_i}-g_{i-1}}^2\\
+  R^2 \left\| \mu _ { p } - g _ { i - 1 } \right\| _ { \mathscr { H } }^2 &\leq
+  \left\langle \mu _ { p } - g _ { i - 1 } , \mu _ { p } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } }^2
+\end{align}
+
+The first one can be showed introducing $\mu_p$ in the right term and using
+ \eqref{eq:neg}, while the second one comes from \eqref{eq:18} and the fact that
+ the square function is decreasing on $\R_{-}$.
+
+We are now able to prove the result :
+\begin{align*}
+&\left\| \mu_p-g_i \right\|_{ \mathscr { H }} ^ { 2 } \\ &\qquad= \frac { \left\| \mu_p-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } \left\| \mu_p-\overline{g_i} \right\|_{ \mathscr { H }} ^ { 2 } - \left\langle \mu_p-g_i , \mu_p-\overline{g_i} \right\rangle_{ \mathscr { H }} ^ { 2 } } { \left\| \overline{g_i}-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } }\\
+&\qquad\leq \frac { \left\| \mu_p-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } \left\| \mu_p-\overline{g_i} \right\|_{ \mathscr { H }} ^ { 2 } - R^2 \left\| \mu _ { p } - g _ { i - 1 } \right\| _ { \mathscr { H } }^2 } { \left\| \overline{g_i}-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } }\\
+&\qquad\leq \frac { \left\| \mu_p-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } \left\| \mu_p-\overline{g_i} \right\|_{ \mathscr { H }} ^ { 2 } - R^2 \left\| \mu _ { p } - g _ { i - 1 } \right\| _ { \mathscr { H } }^2 } { \norme{\mu_p-\overline{g_i}}^2 }\\
+&\qquad \leq \prt{1-\frac{R^2}{\norme{\mu_p-\overline{g_i}}^2}}\cdot \norme{\mu_p-g_{i-1}}^2\\
+&\qquad \leq \prt{1-\frac{R^2}{D^2}}\cdot \norme{\mu_p-g_{i-1}}^2
+\end{align*}
+where the last inequality comes from
+\begin{equation*}
+  \norme{\mu_p-\overline{g_i}} \leq \sup_{g_1, g_2 \in \G}   \norme{g_1-g_2} :=D
+\end{equation*}
  \end{boxcomputation}
 
 \section{Contraction}
