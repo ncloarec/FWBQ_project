@@ -559,21 +559,21 @@ of $\G$ :
   iteration \texttt{i}:
   \begin{equation}
     \label{eq:18}
-    \Bigps{\mu_p-g_{i}}{\mu_p-\overline{g_{i+1}}}+R \norme{\mu_p-g_{i}} \leq 0
+    \Bigps{\mu_p-g_{i-1}}{\mu_p-\overline{g_{i}}}+R \norme{\mu_p-g_{i-1}} \leq 0
   \end{equation}
 \end{boxtheorem}
 
 \begin{boxcomputation}
-  By denoting $d = \mu_p-g_i$ and using the definition of $R$ we have :
+  By denoting $d = \mu_p-g_{i-1}$ and using the definition of $R$ we have :
 \begin{equation*}
   g = \mu_p+R\cdot \frac{d}{\norme{d}} \in \G.
 \end{equation*}
-Moreover by using the definition of $\overline{g_{i+1}}$ we get:
+Moreover by using the definition of $\overline{g_{i}}$ we get:
   \begin{align*}
-\Bigps{\mu_p-g_{i}}{\mu_p-\overline{g_{i+1}}} &=
-\Bigps{-\grad{J(g_i)}}{\mu_p-\overline{g_{i+1}}}\\&\leq
-\Bigps{-\grad{J(g_i)}}{\mu_p-g}\\
-&\leq R\cdot\Bigps{\mu_p-g_{i}}{\frac{d}{\norme{d}}}\\
+\Bigps{\mu_p-g_{i-1}}{\mu_p-\overline{g_{i}}} &=
+\Bigps{-\grad{J(g_{i-1})}}{\mu_p-\overline{g_{i}}}\\&\leq
+\Bigps{-\grad{J(g_{i-1})}}{\mu_p-g}\\
+&\leq -R\cdot\Bigps{\mu_p-g_{i-1}}{\frac{d}{\norme{d}}}\\
 &\leq -R \norme{d}
   \end{align*}
   which is the desired result.
