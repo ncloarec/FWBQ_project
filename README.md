@@ -45,3 +45,6 @@ give also the same formulas
 
 # Latex config
 - **run file**: "xelatex" %.tex|"/Library/TeX/texbin/biber" %.bcf|"xelatex" %.tex|open %.pdf
+
+# To do
+- add subsections
