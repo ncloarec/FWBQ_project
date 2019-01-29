@@ -550,11 +550,30 @@ of $\G$ :
 We start with a proposition\footnote{Proposition 3.1 in \cite{Beck}.} :
 \begin{boxtheorem}
   We denote by $R$ the radius of the largest ball of center $\mu_p$.
-  Using the same notations as previously and the assumption above, we have :
+  Using the same notations as previously and the assumption above, we have at
+  iteration \texttt{i+1}:
   \begin{equation}
-    \Bigps{\mu_p-g_k}{\mu_p-\overline{g_k}}+R \norme{\mu_p-g_k} \leq 0
+    \Bigps{\mu_p-g_{i}}{\mu_p-\overline{g_{i+1}}}+R \norme{\mu_p-g_{i}} \leq 0
   \end{equation}
 \end{boxtheorem}
+
+\begin{boxcomputation}
+  By denoting $d = \mu_p-g_i$ and using the definition of $R$ we have :
+\begin{equation*}
+  g = \mu_p+R\cdot \frac{d}{\norme{d}} \in \G.
+\end{equation*}
+Moreover by using the definition of $\overline{g_{i+1}}$ we get:
+  \begin{align*}
+\Bigps{\mu_p-g_{i}}{\mu_p-\overline{g_{i+1}}} &=
+\Bigps{-\grad{J(g_i)}}{\mu_p-\overline{g_{i+1}}}\\&\leq
+\Bigps{-\grad{J(g_i)}}{\mu_p-g}\\
+&\leq R\cdot\Bigps{\mu_p-g_{i}}{\frac{d}{\norme{d}}}\\
+&\leq -R \norme{d}
+  \end{align*}
+  which is the desired result.
+\end{boxcomputation}
+
+
 
 
 \section{Contraction}
