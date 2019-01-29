@@ -475,12 +475,15 @@ But a question rises : Why atoms $g_i$ should be of the form $\Phi(x_i)$?
 In fact, let's
  $g$ be a point in the domain. Because of its definition,
   $g$ can simply be expressed as a convex combination of elements in the feature space $\Phi(\X)$, \ie $g = \sum_k \alpha_k \Phi(x_k)$ with $\sum_k \alpha_k=1$ and thus we have :
- \begin{align*}
-   \bigps{g}{\grad{J}(g_{i-1})} &= \sum_k \alpha_k \cdot \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
-   &\geq \prt{\sum_k \alpha_k} \cdot \min_{k} \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
-   &= \bigps{\Phi(x_{k_0})}{\grad{J}(g_{i-1})}
- \end{align*}
- for $k_0$ such that $k_0 \in \argmin{\bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}}$.
+  \begin{boxcomputation}
+    \begin{align*}
+      \bigps{g}{\grad{J}(g_{i-1})} &= \sum_k \alpha_k \cdot \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
+      &\geq \prt{\sum_k \alpha_k} \cdot \min_{k} \bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}\\
+      &= \bigps{\Phi(x_{k_0})}{\grad{J}(g_{i-1})}
+    \end{align*}
+    for $k_0$ such that $k_0 \in \argmin{\bigps{\Phi(x_k)}{\grad{J}(g_{i-1})}}$.
+  \end{boxcomputation}
+
 
  We now understand how can the Frank Wolfe algorithm be useful here : because the
  minimization of \eqref{eq:gbar} can be restricted at extreme points of the domain,
@@ -493,10 +496,12 @@ In fact, let's
 
  Therefore, if we denote by $\acc{w_l}_{l=1}^{i-1}$ the coefficients in front of
  $\acc{\Phi(x_l)}_{l=1}^{i-1}$ in $g_{i-1}$ and using the reproducing kernel property, we have :
- \begin{align*}
-   \left\langle \Phi ( x ) , g _ { i - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } } &= \left\langle \Phi ( x ) , \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } \Phi \left( x _ { l } \right) - \mu _ { p } \right\rangle _ { \mathcal { H } }\\
-   &= \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } k \left( x , x _ { l } \right) - \mu _ { p } ( x )\\
- \end{align*}
+ \begin{boxcomputation}
+   \begin{align*}
+     \left\langle \Phi ( x ) , g _ { i - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } } &= \left\langle \Phi ( x ) , \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } \Phi \left( x _ { l } \right) - \mu _ { p } \right\rangle _ { \mathcal { H } }\\
+     &= \sum _ { l = 1 } ^ { i - 1 } w _ { l } ^ { ( i - 1 ) } k \left( x , x _ { l } \right) - \mu _ { p } ( x )\\
+   \end{align*}
+ \end{boxcomputation}
 which gives an explicit formula for the optimization problem\footnote{We remark that if
  the optimization problem on $g \in \G$ was a classic convex problem, this is not the case anymore when we perform the optimization on $x \in \X$.} with known quantities.
  In fact, in the simulations that we have been able to reproduce successfully, the choice of a gaussian kernel $k$ allow us to compute $\mu_p( \cdot )$ easily. See \cite{FWBQ} \textit{Appendix C} for more details.
@@ -547,12 +552,13 @@ of $\G$ :
 
 
 
-We start with a proposition\footnote{Proposition 3.1 in \cite{Beck}.} :
+{$\bullet$~\normalfont\bfseries\color{myorange!90!black} Step 1 }We start with a proposition\footnote{Proposition 3.1 in \cite{Beck}.} :
 \begin{boxtheorem}
   We denote by $R$ the radius of the largest ball of center $\mu_p$.
   Using the same notations as previously and the assumption above, we have at
-  iteration \texttt{i+1}:
+  iteration \texttt{i}:
   \begin{equation}
+    \label{eq:18}
     \Bigps{\mu_p-g_{i}}{\mu_p-\overline{g_{i+1}}}+R \norme{\mu_p-g_{i}} \leq 0
   \end{equation}
 \end{boxtheorem}
@@ -573,7 +579,50 @@ Moreover by using the definition of $\overline{g_{i+1}}$ we get:
   which is the desired result.
 \end{boxcomputation}
 
+{$\bullet$~\normalfont\bfseries\color{myorange!90!black} Step 2 } There is an
+ explicit formula for $\rho_i$ at the $\texttt{i}^{th}$ iteration.
 
+ \begin{boxtheorem}
+If we denote by $\ropt$ the optimum in the line search at the $\texttt{i}^{th}$
+iteration, the following formula holds :
+\begin{equation}
+\ropt = \frac { \left\langle g _ { i - 1 } - \mu _ { p } , g _ { i - 1 } - \overline{g_i} \right\rangle _ { \mathcal { H } } } { \left\| g _ { i - 1 } - \overline{g_i} \right\| _ { \mathcal { H } } ^ { 2 } }
+\end{equation}
+ \end{boxtheorem}
+ \begin{boxcomputation}
+  We will show here the proof from \cite{Beck} instead of the one in \cite{FWBQ}
+  as it requires less computation and more intuition\footnote{the authors of \cite{FWBQ} do not give a full proof of this result the most important (showing that $\ropt \in \intff{0}{1}$).}. Let
+  \begin{equation*}
+    f : \left| \begin{array} { c c c } { \intff{0}{1} } & { \longrightarrow } & { \mathbb { R } } \\ { \rho } & { \longmapsto } & { J(\prt{1-\rho}g_{i-1}+\rho{\overline{g_i}}) } \end{array} \right.
+\end{equation*}
+Because $J$ is quadratic so is $f$ and we can replace $f$ by its quadratic approximation :
+\begin{equation*}
+  \begin{split}
+    f(\rho) = J ( g_{i-1} ) + \rho \langle \overline{g_i}- g_{i-1} , \nabla J ( g_{i-1} ) \rangle \\ + \frac { 1 } { 2 } \rho ^ { 2 } \|  g_{i-1} - \overline{g_i} \| ^ { 2 }
+  \end{split}
+\end{equation*}
+Taking the derivative of this expression, gives :
+\begin{equation*}
+  \ropt =   \frac { \left\langle g _ { i - 1 } - \mu _ { p } , g _ { i - 1 } - \overline{g_i} \right\rangle _ { \mathcal { H } } } { \left\| g _ { i - 1 } - \overline{g_i} \right\| _ { \mathcal { H } } ^ { 2 } }.
+\end{equation*}
+which is the desired result but we need to ensure that $\ropt$ is between $0$ and
+ $1$.
+
+By definition of $\overline{g_i}$ :
+\begin{align*}
+  \overline { g } _ { i } &= \arg \min _ { g \in \mathscr { G } } \left( g , \nabla J \left( g _ { i - 1 } \right) \right\rangle _ { \mathscr { H } }\\
+  & \arg \min _ { g \in \mathscr { G } } \left( g - g _ { i - 1 } , \nabla J \left( g _ { i - 1 } \right) \right\rangle _ { \mathscr { H } }\\
+\end{align*}
+Because $g_{i-1} \in \G$\footnote{Remember that $g_{i-1}$ is a convex combination
+of elements of $\Phi(\X)$.}, we have
+\begin{align*}
+  \left\langle \underbrace{g _ { i - 1 } - \mu _ { p }}_{=\grad{J\prt{g_{i-1}}}} , g _ { i - 1 } - \overline{g_i} \right\rangle _ { \mathcal { H } } &\geq
+  \left\langle \grad{J\prt{g_{i-1}}} , g _ { i - 1 } -  g _ { i - 1 }\right\rangle _ { \mathcal { H } }\\
+  &\geq 0
+\end{align*}
+so $\ropt \geq 0$.
+ \end{boxcomputation}
+Using \eqref{eq:18}, we have $$\left\langle \mu _ { p } - g _ { i -1} , \mu _ { p } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \leq 0$$
 
 
 \section{Contraction}
