@@ -41,7 +41,7 @@
   keywords    = {stat.ML, math.NA, G.1.4},
 }
 
-@article{beck,
+@article{Beck,
 author = {Beck, Amir and Teboulle, Marc},
 year = {2004},
 month = {01},
@@ -50,6 +50,31 @@ title = {A conditional gradient method with linear rate of convergence for solvi
 volume = {59},
 journal = {Mathematical Methods of Operations Research},
 doi = {10.1007/s001860300327}
+}
+
+@Article{Bach,
+  author       = {Francis Bach and Simon Lacoste-Julien and Guillaume Obozinski},
+  title        = {On the Equivalence between Herding and Conditional Gradient Algorithms},
+  abstract     = {We show that the herding procedure of Welling (2009) takes exactly the form of a standard convex optimization algorithm--namely a conditional gradient algorithm minimizing a quadratic moment discrepancy. This link enables us to invoke convergence results from convex optimization and to consider faster alternatives for the task of approximating integrals in a reproducing kernel Hilbert space. We study the behavior of the different variants through numerical simulations. The experiments indicate that while we can improve over herding on the task of approximating integrals, the original herding algorithm tends to approach more often the maximum entropy distribution, shedding more light on the learning bias behind herding.},
+  date         = {2012-03-20},
+  eprint       = {http://arxiv.org/abs/1203.4523v2},
+  eprintclass  = {cs.LG},
+  eprinttype   = {arXiv},
+  file         = {:http\://arxiv.org/pdf/1203.4523v2:PDF},
+  journaltitle = {ICML 2012 International Conference on Machine Learning, Edimburgh : Royaume-Uni (2012)},
+  keywords     = {cs.LG, math.OC, stat.ML},
+}
+
+@Article{Chen,
+  author      = {Yutian Chen and Max Welling and Alex Smola},
+  title       = {Super-Samples from Kernel Herding},
+  abstract    = {We extend the herding algorithm to continuous spaces by using the kernel trick. The resulting "kernel herding" algorithm is an infinite memory deterministic process that learns to approximate a PDF with a collection of samples. We show that kernel herding decreases the error of expectations of functions in the Hilbert space at a rate O(1/T) which is much faster than the usual O(1/pT) for iid random samples. We illustrate kernel herding by approximating Bayesian predictive distributions.},
+  date        = {2012-03-15},
+  eprint      = {http://arxiv.org/abs/1203.3472v1},
+  eprintclass = {cs.LG},
+  eprinttype  = {arXiv},
+  file        = {:http\://arxiv.org/pdf/1203.3472v1:PDF},
+  keywords    = {cs.LG, stat.ML},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

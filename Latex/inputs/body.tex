@@ -294,12 +294,10 @@ Let's describe here both the Frank-Wolfe algorithm and its variant with the Line
   \item [Iterations] For $i=2$ to $n$ :
   \begin{mydescription}[0.2cm]
     \item [Search direction] we replace in \eqref{eq:fwpbm} $J$ by its first-order
-    Taylor expansion around $g_k$ to solve the following subproblem
-    \begin{boxcomputation}
+    Taylor expansion around $g_k$ to solve the following subproblem :
       \begin{equation}\label{eq:fwlin}
         \begin{array} { c } { \text { minimize }  \acc{J \left( g_{i-1} \right) + \nabla J \left( g_{i-1} \right) ^ { \mathrm { T } } \left( g - g_{i-1} \right)} } \\ { \text { subject to } g \in \G } \end{array}
       \end{equation}
-    \end{boxcomputation}
 Let's denote as \cite{FWBQ}
 \begin{equation}\label{eq:gbar}
   \overline { g } _ { i } := \arg \min _ { g \in \G } \bigps{g}{ \nabla J \left( g _ { i - 1 } \right)}
@@ -501,7 +499,7 @@ In fact, let's
  \end{align*}
 which gives an explicit formula for the optimization problem\footnote{We remark that if
  the optimization problem on $g \in \G$ was a classic convex problem, this is not the case anymore when we perform the optimization on $x \in \X$.} with known quantities.
- In fact, in the simulations that we have been able to reproduce successfully, the choice of a gaussian kernel $k$ allow us to compute $\mu_p( \cdot )$ easily. See \cite{FWBQ} \textit{Appendix C} for more details. 
+ In fact, in the simulations that we have been able to reproduce successfully, the choice of a gaussian kernel $k$ allow us to compute $\mu_p( \cdot )$ easily. See \cite{FWBQ} \textit{Appendix C} for more details.
  \section{The Frank-Wolfe Bayesian Quadrature algorithm}
  \label{sec:CC}
 
@@ -517,8 +515,41 @@ We describe here the final algorithm which is a combination of the two previous
  It's important to note that weights at each iteration \texttt{i} are used only for
  the next iteration \texttt{i+1} while the design points $x_i$ are used for all iteration \texttt{j} with $i<j\leq n$.
 
-\section{Consistency and Contraction}
-\label{sec:CC}
+\section{Consistency}
+\label{sec:consistency}
+
+We will establish here the main result of the article \cite{FWBQ} and referred as Theorem 1:
+\begin{boxdefinition}
+  \begin{center}
+    \textit{The posterior mean }$\hat { p } _ { \mathrm { FWBQ } } [ f ]$ \textit{converges
+    to the true integral }$p[f]$ at the following rates:
+  \end{center}
+\begin{align}
+    \left| p [ f ] - \hat { p } _ { \mathrm { FWBQ } } [ f ] \right| &\leq M M D \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right) \nonumber\\
+    &\leq \left\{ \begin{array} { c c } { \frac { 2 D ^ { 2 } } { R } n ^ { - 1 } } & { \footnotesize \text {for  FWBQ} } \\ { \sqrt { 2 } D \exp \left( - \frac { R ^ { 2 } } { 2 D ^ { 2 } } n \right) } & {\footnotesize \text {for FWLSBQ } } \end{array} \right.
+\end{align}
+where the FWBQ uses step-size $\rho _ { i } = 1 / ( i + 1 )$, $D \in ( 0 , \infty )$
+  is the diameter of the marginal polytope $\G$ and $R \in ( 0 , \infty )$ gives the
+  radius of the \textbf{largest}\footnote{There was a typo here in \cite{FWBQ} as the authors mentioned the radius  of the smallest ball which is clearly zero. In fact, greater is the radius and better is the inequality, so of course we are more interested in large
+  radius rather than smaller ones. } ball of center $\mu_p$ included in $\G$.
+\end{boxdefinition}
+
+It was a bit disappointing to see that the authors of \cite{FWBQ} did not prove the most interesting part of the theorem,
+ which is the introduction of the diameter of the marginal polytope $D$ and the radius of the largest ball of center $R$. Instead, it came out of nowhere quoting \cite{Bach}, which is of course deeply unsatisfactory from a scientific standpoint
+  as it gives no clear understanding about the intuition behind this result.
+
+  We were able to find more details about this result in \cite{Beck} and \cite{Chen}.
+Let's start assuming as \cite{Bach} that $\mu_p$ is in the relative interior
+of $\G$ :
+\begin{equation}
+\exists R>0 \text{ such that } B(\mu_p, R) \subset \G
+\end{equation}
+
+
+
+\section{Contraction}
+\label{sec:contraction}
+
 
 \section{Experimental Results}
 \label{sec:ER}
