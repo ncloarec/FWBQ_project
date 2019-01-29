@@ -621,9 +621,35 @@ of elements of $\Phi(\X)$.}, we have
   &\geq 0
 \end{align*}
 so $\ropt \geq 0$.
+Using \eqref{eq:18}, we have $$\left\langle \mu _ { p } - g _ { i -1} , \mu _ { p } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \leq 0.$$
+Thus
+\begin{align*}
+  &\left\langle g _ { i - 1 } - \mu _ { p } , g _ { i - 1 } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \\&\quad =
+  \left\langle \mu_p-g_{i-1} , \prt{\mu_p-g_{i-1}} - \prt{\mu_p-\overline{g_i} } \right\rangle_ { \mathscr { H } }\\
+  &\quad =\left\| \mu_p-g_{i-1} \right\|_ { \mathscr { H } } ^ { 2 } - \left\langle \mu_p-g_{i-1} , \mu_p-\overline{g_i}  \right\rangle_ { \mathscr { H } }\\
+  &\quad \leq \left\| \mu_p-g_{i-1} \right\|_ { \mathscr { H } } ^ { 2 } - \left\langle \mu_p-g_{i-1} , \mu_p-\overline{g_i}  \right\rangle_ { \mathscr { H } } \\&\qquad + \left( \left\| \mu_p-\overline{g_i}  \right\|_ { \mathscr { H } } ^ { 2 } - \underbrace{\left\langle \mu_p-g_{i-1} , \mu_p-\overline{g_i}  \right\rangle_ { \mathscr { H }} }_{\leq 0} \right)\\
+  &\quad = \left\| \prt{\mu_p-g_{i-1}} - \prt{\mu_p-\overline{g_i} } \right\|_ { \mathscr { H } } ^ { 2 }\\
+  &\quad = \left\| g _ { i - 1 } - \overline{g_i} \right\| _ { \mathcal { H } } ^ { 2 }
+\end{align*}
+which gives us $\ropt \leq 1$.
  \end{boxcomputation}
-Using \eqref{eq:18}, we have $$\left\langle \mu _ { p } - g _ { i -1} , \mu _ { p } - \overline { g _ { i } } \right\rangle _ { \mathscr { H } } \leq 0$$
 
+ {$\bullet$~\normalfont\bfseries\color{myorange!90!black} Step 3 } We show here
+ the linear convergence rate of the algorithm :
+ \begin{boxtheorem}
+\begin{equation}
+  \norme{\mu_p-g_i}^2 \leq \prt{1-q^2}\cdot \norme{\mu_p-g_{i-1}}^2
+\end{equation}
+where $q^2 = ???$
+ \end{boxtheorem}
+
+ \begin{boxcomputation}
+Using $g _ { i } = \left( 1 - \ropt \right) g _ { i - 1 } + \ropt \overline { g } _ { i }$ and the fact that $J$ is equal to its quadratic approximation, we have :
+\begin{align*}
+  \norme{\mu_p-g_i}^2
+  &= \left( \ropt \right) ^ { 2 } \left\| \overline{g_i}-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 } \\&+ 2 \ropt \left\langle \mu_p-g_{i-1} , g_{i-1}-\overline{g_i} \right\rangle_{ \mathscr { H }} \\&+ \left\| \mu_p-g_{i-1} \right\|_{ \mathscr { H }} ^ { 2 }
+\end{align*}
+ \end{boxcomputation}
 
 \section{Contraction}
 \label{sec:contraction}
