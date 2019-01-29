@@ -535,16 +535,26 @@ where the FWBQ uses step-size $\rho _ { i } = 1 / ( i + 1 )$, $D \in ( 0 , \inft
 \end{boxdefinition}
 
 It was a bit disappointing to see that the authors of \cite{FWBQ} did not prove the most interesting part of the theorem,
- which is the introduction of the diameter of the marginal polytope $D$ and the radius of the largest ball of center $R$. Instead, it came out of nowhere quoting \cite{Bach}, which is of course deeply unsatisfactory from a scientific standpoint
+ which is the introduction of the diameter of the marginal polytope ($D$) and the radius of the largest ball of center $\mu_p$ ($R$). Instead, it came out of nowhere quoting \cite{Bach}, which is of course deeply unsatisfactory from a scientific standpoint
   as it gives no clear understanding about the intuition behind this result.
 
   We were able to find more details about this result in \cite{Beck} and \cite{Chen}.
 Let's start assuming as \cite{Bach} that $\mu_p$ is in the relative interior
 of $\G$ :
 \begin{equation}
-\exists R>0 \text{ such that } B(\mu_p, R) \subset \G
+\exists r>0 \text{ such that } B(\mu_p, r) \subset \G.
 \end{equation}
 
+
+
+We start with a proposition\footnote{Proposition 3.1 in \cite{Beck}.} :
+\begin{boxtheorem}
+  We denote by $R$ the radius of the largest ball of center $\mu_p$.
+  Using the same notations as previously and the assumption above, we have :
+  \begin{equation}
+    \Bigps{\mu_p-g_k}{\mu_p-\overline{g_k}}+R \norme{\mu_p-g_k} \leq 0
+  \end{equation}
+\end{boxtheorem}
 
 
 \section{Contraction}
