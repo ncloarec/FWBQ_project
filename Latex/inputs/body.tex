@@ -25,8 +25,8 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
  $\acc{w_i}$ :
   \begin{mydescription}
   \item [Monte Carlo]: $w_i = \frac{1}{n}$ and $x_i$ realization of multivariate random variable $X_i \stackrel{iid}{\sim} X$ where $X$ has $p(\cdot)$ as probability distribution.
-  \item [Quasi-Monte Carlo]:$w_i = \frac{1}{n}$ and $x_i$ are chosen according to a low-discrepancy sequence. The Quasi-Monte Carlo method converges with rate $\O (\sqrt { N } )$ whereas the classical Monte Carlo method converges with rate $\O(N)$.
- \item [Kernel herding]: the sequences $(w_i)$ and $(x_i)$ are updated according to the following equations : $x_{t+1} = \underset { x \in \chi}{ argmax } \left< { w }_{ t },\phi (x) \right> $ and $w_{t+1} = { w }_{ t }+{ \Expec{} }_{ x\sim p }\left[ \phi (x) \right] -\phi ({ x }_{ t+1 })$. This method has the same rate of convergence than the Quasi-Monte Carlo method.
+  \item [Quasi-Monte Carlo]:$w_i = \frac{1}{n}$ and $x_i$ are chosen according to a low-discrepancy sequence. The Quasi-Monte Carlo method converges with rate $\O\prt{\frac{1}{ n}}$ whereas the classical Monte Carlo method converges with rate $\O \prt{\frac{1}{\sqrt { n }}}$.
+ \item [Kernel herding]: the sequences $(w_i)$ and $(x_i)$ are updated according to the following equations : $x_{t+1} = \underset { x \in \chi}{ \argmax } \left< { w }_{ t },\Phi (x) \right> $ and $w_{t+1} = { w }_{ t }+{ \Expec{} }_{ x\sim p }\left[ \Phi (x) \right] -\Phi ({ x }_{ t+1 })$ where $\Phi(\cdot)$ denotes the feature map function from $\X$ to an Hilbert space that we will later introduce. This method has the same rate of convergence than the Quasi-Monte Carlo method.
   \item [Frank-Wolfe Bayesian Quadrature]:
   \begin{myitemize}[0.2cm]
 \item $\acc{w_i}$ appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ}),
@@ -39,8 +39,13 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
 \noindent
   Through this report, we will detail every results from \cite{FWBQ} with the goal
   to clarify and explain details that could have been omitted intentionally or not and which, in our view, make the Briol's and al. approach more natural, intuitive and easier
-  to understand.
+  to understand.\\
+
   % use Bach presentation for convergence rates benchmark
+  \noindent
+  Lastly, we were able to successfully reproduce all the simulations from \cite{FWBQ} with an additional application in pricing of financial derivatives with real worlds dataset. The code can be found here :
+
+
 
 \section{Background}
 % write $\mu_p$ with an integral
@@ -548,14 +553,19 @@ It was a bit disappointing to see that the authors of \cite{FWBQ} did not prove 
   as it gives no clear understanding about the intuition behind this result.
 
   We were able to find more details about this result in \cite{Beck} and \cite{Chen}.
+  We will focus here on the proof of the FWLSBQ's consistency as it is the most
+  difficult one involving few other results and propositions that we will also
+  explore. The proof of the FWBQ's consistency in the case of uniform weights $\prt{\rho_i=\frac{1}{i=1}}$ can be adapted from \cite{Chen} proposition 1 when they
+  show with same arguments that we will expose here that $w_n := n\cdot
+  \prt{\mu_p-g_n}$ is bounded.
+
+\subsection*{Frank Wolfe Bayesian Quadrature with line search}
+
 Let's start assuming as \cite{Bach} that $\mu_p$ is in the relative interior
 of $\G$ :
 \begin{equation}
 \exists r>0 \text{ such that } B(\mu_p, r) \subset \G.
 \end{equation}
-
-
-\subsection{Frank Wolfe Bayesian Quadrature with line search}
 
 {$\bullet$~\normalfont\bfseries\color{myorange!90!black} Step 1 }We start with a proposition\footnote{Proposition 3.1 in \cite{Beck}.} :
 \begin{boxtheorem}
