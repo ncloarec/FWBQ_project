@@ -744,8 +744,44 @@ We have implemented the following algorithms : -- FW and FWBQ (when Line-Search 
 
 We also used an exponentiated-quadratic (EQ) kernel $k(x, x') := \lambda^{2} exp(-\frac{1}{2}\sigma^{2} \| x-x' \|_{2}^{2} )$. EQ kernel is a relevant choice when $p$ is a mixture of gaussians. Moreover, the mean element $\mu_{p}$ has a closed-form expression.
 In order to replicate the simulation study of the paper, we took $p$ as a mixture of 20 two-dimensional gaussians. Two dimensions for each gaussians allow us to plot selected points, the function $f$, the approximation of the mean element $g_n$ and the mean element $\mu_{p}$ so that we can come up with a visual representation of the algorithms.
+\newpage
+The following graph is a plot of the bivariate kernel density estimate of the 20 two-dimensional gaussians. \\
+\begin{center}
+	\includegraphics[scale=0.25]{plot-simulation-kde.png}
+\end{center}
+\noindent
+We start with a smooth function $f$ that is the sum of 3 two-dimensional gaussians. Let us notice that the function $f$ intervenes at the end of our algorithms. In other words, we can change $f$ in order to obtain someother values of the integral without having to relaunch everything.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.25]{plot-simulation-3d-function.png}
+	\caption{\textbf{KDE plot of the mixture of gaussians $p$.}}
+\end{center}
+\end{figure}
+\noindent
+The next figures shows the 40 selected points in the FWBQ (FW algorithm) and the FWLSQB (FWLS algorithm) algorithms.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.20]{plot-simulation-selectedpoints-FWBQ.png}
+	\includegraphics[scale=0.20]{plot-simulation-selectedpoints-FWLSBQ.png}
+	\caption{\textbf{Points selected by the FW (left) and FWLS (right) algorithm}}
+\end{center}
+\end{figure}
+\noindent
+It is interesting to visualize what is happening when the point are selected by the FW and the FWLS algorithm throughout the iterations.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.30]{plot-simulation-3d-meanelement-FWBQ.png}
+	\includegraphics[scale=0.30]{plot-simulation-3d-meanelement-FWLSBQ.png}
+	\caption{\textbf{Convergence towards the mean element of FW algorithm (left) and the FWLS algorithm (right).}}
+\end{center}
+\end{figure}
+\noindent
+Adding the line-search allows for a faster convergence towards the mean element.
 
 \subsection{An example of application}
+We want to calculate the payoff of a basket option : $$ \mathbb{E}_P \Big( f(S(T)) \Big) = \int f(s) p(s) ds $$ where for example $f(x) = \text{max} ( \sum_{i = 1}^{d} \alpha_{(i)} x_{(i)} - K, 0) $ with $K = \sum_{i = 1}^{d} \alpha_{(i)} S_{(i)}(0) $. The idea is to approximate this expectancy by the one given by FWLSBQ : $$ \mathbb{E}_P \Big( f(S(T)) \Big) \simeq \sum_{i = 1}^{N} w_{(i)}^{BQ} f(S_{(i)}(T))) $$ where the $S_{(i)}(T)$ are the points selected by the FWLS algorithm. \\
+We need a model for the stock prices. The evolution is modelled by the following stochastic differential equation : $$ dS(t) = \mu dS_t + \sigma S_t dB(t) $$ where $S$ is the asset price, $\mu$ is the drift, $\sigma$ is the volatility and $B$ is a Brownian motion (which can be thought as $dB(t) \hookrightarrow N(0, dt)$). Let $r$ be the risk-free rate. After using Ito's Lemma to get an expression of $d\text{log}S_t$, the solution is given by : $S(t) = S(0) \text{exp} ((r-\frac{1}{2}\sigma^2)t + \sigma \sqrt{t} N(0, 1) )$. In the case where we are studying a basket of $d$ assets, $S_{(i)}(t) = S_{(i)}(0) \text{exp} ((r-\frac{1}{2}\sigma_{(i)}^2)t + \sigma \sqrt{t} W_{(i)} )$ for $i \in \{0, ..., d-1\}$ where the vector $W$ = $(W_{(0)}, ..., W_{(d-1)})$ follows a multivariate normal distribution with mean $MU = (0, ..., 0)$ and with a covariance matrix $COR$ which is in fact the correlation matrix between assets. \\
+The $d$ assets will be $d$ stocks. We first start by estimating the covariance matrix between the $d = 4$ assets (Apple, Facebook, Google and Microsoft) using the close on a 1-year history (year 2018).
 
 % intuition
 % graph to show that it is closed to a gradient descent
