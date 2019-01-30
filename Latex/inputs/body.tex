@@ -24,13 +24,9 @@ density with respect to the Lebesgue measure on $\X$ and $f : \X \rightarrow \R$
  but of course the real challenge lies in the choice of sequences $\acc{x_i}$ and
  $\acc{w_i}$ :
   \begin{mydescription}
-    \item [Monte Carlo]: $w_i = \frac{1}{n}$ and $x_i$ realization of multivariate
-    random variable $X_i \stackrel{iid}{\sim} X$ where $X$ has $p(\cdot)$ as probability
-    distribution.
-    \item [Kernel herding]:
-    \item [Quasi-Monte Carlo]:
-
-
+  \item [Monte Carlo]: $w_i = \frac{1}{n}$ and $x_i$ realization of multivariate random variable $X_i \stackrel{iid}{\sim} X$ where $X$ has $p(\cdot)$ as probability distribution.
+  \item [Quasi-Monte Carlo]:$w_i = \frac{1}{n}$ and $x_i$ are chosen according to a low-discrepancy sequence. The Quasi-Monte Carlo method converges with rate $\O (\sqrt { N } )$ whereas the classical Monte Carlo method converges with rate $\O(N)$.
+ \item [Kernel herding]: the sequences $(w_i)$ and $(x_i)$ are updated according to the following equations : $x_{t+1} = \underset { x \in \chi}{ argmax } \left< { w }_{ t },\phi (x) \right> $ and $w_{t+1} = { w }_{ t }+{ \Expec{} }_{ x\sim p }\left[ \phi (x) \right] -\phi ({ x }_{ t+1 })$. This method has the same rate of convergence than the Quasi-Monte Carlo method.
   \item [Frank-Wolfe Bayesian Quadrature]:
   \begin{myitemize}[0.2cm]
 \item $\acc{w_i}$ appear naturally in the Bayesian Quadrature by taking the expectation of a posterior distribution  (described in section \ref{sec:BQ}),
