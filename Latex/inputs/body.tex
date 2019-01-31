@@ -491,7 +491,7 @@ In fact, let's
  minimization of \eqref{eq:gbar} can be restricted at extreme points of the domain,
  selecting atoms of the form $\Phi(x_k)$ allow us to select interesting points $\acc{x_k}$ which are needed for the bayesian quadrature which are solution of the
  following optimization problem :
- \begin{equation}
+ \begin{equation}\label{eq:xmin}
    x_k \in \arg \min _ { x \in \mathcal { X } } \left\langle \Phi ( x ) , g _ { k - 1 } - \mu _ { p } \right\rangle _ { \mathcal { H } }
  \end{equation}
  where $g \in \G$ in the left term of the inner product has been replaced by $\Phi(x) \in \G$ with $x \in \X$.
@@ -849,7 +849,7 @@ which concludes the proof of the intermediary proposition.
 Substituting $\mopt$ by $p[f]$, $m_n$ by the posterior mean $\hat { p } _ { \mathrm { FWBQ } } [ f ]$ and $\sigma_n$ by the posterior standard deviation $M M D \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right)$ and using the results
  from Theorem 1 show the second theorem.
 
-\section{Experimental Results 1}
+\section{Experimental Results}
 \label{sec:ER}
 
 \subsection{Overview of the code}
@@ -888,7 +888,7 @@ It is interesting to visualize what is happening when the point are selected by 
 	\caption{\textbf{Convergence towards the mean element of FW algorithm (left) and the FWLS algorithm (right).}}
 \end{center}
 \end{figure}
-Adding the line-search allows for a much faster convergence towards the mean element. In no more than 25 points, the approximation of the mean element seems to perfectly match the analytically calcultated mean element. We conclude by saying the line-search (which choose the $rho_{i}$) plays a crucial role in the algorithm.
+Adding the line-search allows for a much faster convergence towards the mean element. In no more than 25 points, the approximation of the mean element seems to perfectly match the analytically calcultated mean element. We conclude by saying the line-search (which choose the $\rho_{i}$) plays a crucial role in the algorithm.
 We can then compute the value of the integral with a $95\%$ confidence interval.
 \begin{figure}[H]
 \begin{center}
@@ -899,9 +899,23 @@ We can then compute the value of the integral with a $95\%$ confidence interval.
 
 \subsection{An example of application}
 In this section we have implemented from real data the two algorithms FWBQ and FWLSBQ. In order to have a basis of comparison, we have also implemented on our data the Monte Carlo integration. The data used represents the closing price of the shares of Apple, Facebook, Google and Microsoft of 2018. We compute the return of each stock. The return represents the design points of our theory. \\ \\
-We want to calculate the payoff of a basket option : $$ \mathbb{E}_P \Big( f(S(T)) \Big) = \int f(s) p(s) ds $$ where for example $f(x) = \text{max} ( \sum_{i = 1}^{d} \alpha_{(i)} x_{(i)} - K, 0) $ with $K = \sum_{i = 1}^{d} \alpha_{(i)} S_{(i)}(0) $. The idea is to approximate this expectancy by the one given by FWLSBQ : $$ \mathbb{E}_P \Big( f(S(T)) \Big) \simeq \sum_{i = 1}^{N} w_{(i)}^{BQ} f(S_{(i)}(T))) $$ where the $S_{(i)}(T)$ are the points selected by the FWLS algorithm. \\
+We want to calculate the payoff of a basket option : $$ \mathbb{E}_P \Big( f(S(T)) \Big) = \int f(s) p(s) ds $$ where for example $f(x) = \text{max} ( \sum_{i = 1}^{d} \alpha_{(i)} x_{(i)} - K, 0) $ with $K = \sum_{i = 1}^{d} \alpha_{(i)} S_{(i)}(0) $. The idea is to approximate this expectancy by the one given by FWLSBQ : $$ \mathbb{E}_P \Big( f(S(T)) \Big) \simeq \sum_{i = 1}^{N} w_{(i)}^{BQ} f(S_{(i)}^{FW}(T))) $$ where the $w_{(i)}^{BQ}$ are the BQ weights and the $S_{(i)}^{FW}(T)$ are the points selected by the FWLS algorithm. \\
 We need a model for the stock prices. The evolution is modelled by the following stochastic differential equation : $$ dS(t) = \mu dS_t + \sigma S_t dB(t) $$ where $S$ is the asset price, $\mu$ is the drift, $\sigma$ is the volatility and $B$ is a Brownian motion (which can be thought as $dB(t) \hookrightarrow N(0, dt)$). Let $r$ be the risk-free rate. After using Ito's Lemma to get an expression of $d\text{log}S_t$, the solution is given by : $S(t) = S(0) \text{exp} ((r-\frac{1}{2}\sigma^2)t + \sigma \sqrt{t} N(0, 1) )$. In the case where we are studying a basket of $d$ assets, $S_{(i)}(t) = S_{(i)}(0) \text{exp} ((r-\frac{1}{2}\sigma_{(i)}^2)t + \sigma \sqrt{t} W_{(i)} )$ for $i \in \{0, ..., d-1\}$ where the vector $W$ = $(W_{(0)}, ..., W_{(d-1)})$ follows a multivariate normal distribution with mean $MU = (0, ..., 0)$ and with a covariance matrix $COR$ which is in fact the correlation matrix between assets. \\
-The $d$ assets will be $d$ stocks. We first start by estimating the covariance matrix between the $d = 4$ assets (Apple, Facebook, Google and Microsoft) using the close on a 1-year history (year 2018).
+The $d$ assets will be $d$ stocks. We first start by estimating the covariance matrix between the $d = 4$ assets (Apple, Facebook, Google and Microsoft) using the close on a 1-year history (year 2018). \\
+\\
+We took some arbitrary values for $r$ ($5\%$) and $T$ ($10$). We launched the FWLSBQ algorithm. We obtained the following results.
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[scale=0.25]{plot-application-mmdsquared-value-FWLSBQ.png}
+	\caption{\textbf{MMD$^2$ and the value of the integral for the FWLSBQ algorithm.}}
+\end{center}
+\end{figure}
+This graph is an exemple of how a real dataset can be used to model a distribution which will be then used to price any payoff given some known parameters such as $r$ and $T$.
+\\ \\
+In finance, both giving a fast result and quantifying a result are useful. We used normal distributions to model the returns while we know that financial returns are leptokurtic. Modelling these returns with student distributions for example may be more realistic. However, we will need to use a kernel such that the mean element is analytically tractable.
+
+\subsection{Discussion about our implementation}
+Our implementation is a bit slow. A way to speed the implementation would be to use parallel computing for finding the point \eqref{eq:xmin} at each iteration. For exemple, if we are calculating the value of $M$ points of the space, we can compute $X$ threads each responsible for $M/X$ estimations in order to accelerate the process. Moreover, we believe that the way we keep track of the successive approximations of the mean element $g_{i}$ can also be improved. We used a dictionnary of functions created by a function returning the convex-combination (with weights $1-\rho_{i}$ and $\rho_{i}$) of the previous function $g_{i-1}$ and the atom $\overline{g_i}$. So, each time, we call a function, successive calculations are made to return a value. The higher the iteration, the longer it takes to return a value.
 
 % intuition
 % graph to show that it is closed to a gradient descent
