@@ -555,7 +555,7 @@ It was a bit disappointing to see that the authors of \cite{FWBQ} did not prove 
   We were able to find more details about this result in \cite{Beck} and \cite{Chen}.
   We will focus here on the proof of the FWLSBQ's consistency as it is the most
   difficult one involving few other results and propositions that we will also
-  explore. The proof of the FWBQ's consistency in the case of uniform weights $\prt{\rho_i=\frac{1}{i=1}}$ can be adapted from \cite{Chen} proposition 1 when they
+  explore. The proof of the FWBQ's consistency in the case of uniform weights $\prt{\rho_i=\frac{1}{i+1}}$ can be adapted from \cite{Chen} proposition 1 when they
   show with same arguments that we will expose here that $w_n := n\cdot
   \prt{\mu_p-g_n}$ is bounded.
 
@@ -814,10 +814,40 @@ where $\Phi\prt{\cdot}$ denotes the cumulative distribution function of a standa
 
 Now we need to find an equivalent of $\Phi(x)$ when $x$ goes to infinity. Lets show the following inequality :
 \begin{boxtheorem}
-For $x>0$
+For $x>0$ :
+\begin{equation}
+  \label{eq:28}
+  \frac{1}{x} \prt{1-\frac{1}{x^2}} \e^{-\frac{x^2}{2}}
+  \leq \int_{x}^{+\infty} \e^{-\frac{t^2}{2}} \dt
+  \leq   \frac{1}{x}  \e^{-\frac{x^2}{2}}
+\end{equation}
 \end{boxtheorem}
 
+\noindent
+By integration by parts, we have :
+\begin{align}
+  \int_{x}^{+\infty} \e^{-\frac{t^2}{2}} \dt &=
+  \int_{x}^{+\infty} \frac{1}{t} \cdot \prt{t\cdot \e^{-\frac{t^2}{2}}} \dt \nonumber\\
+  &= \left[ - \frac{\e^{-\frac{t^2}{2}}}{t} \right]_{x}^{+\infty}-
+  \int_{x}^{+\infty} \frac{1}{t^2} \cdot \prt{\e^{-\frac{t^2}{2}}} \dt \nonumber\\
+  &= \frac{1}{x}\cdot \e^{-\frac{x^2}{2}}- \int_{x}^{+\infty} \frac{1}{t^3} \cdot \prt{t\cdot \e^{-\frac{t^2}{2}}} \dt \label{eq:right}\\
+  &= \frac{1}{x}\cdot \e^{-\frac{x^2}{2}} - \frac{1}{x^3}\cdot \e^{-\frac{x^2}{2}}
+  + 3\int_{x}^{+\infty} \frac{1}{t^4} \cdot \e^{-\frac{t^2}{2}} \dt \nonumber\\
+  &= \frac{1}{x} \prt{1-\frac{1}{x^2}} \cdot \e^{-\frac{x^2}{2}} + 3\int_{x}^{+\infty} \frac{1}{t^4} \cdot \e^{-\frac{t^2}{2}} \dt.\label{eq:left}
+\end{align}
+\noindent
+\eqref{eq:right} proves the right inequality while \eqref{eq:left} proves the left one.
+\noindent
+\eqref{eq:28} is sufficient to shows that $\int_{x}^{+\infty} \e^{-\frac{t^2}{2}} \dt \sim \frac{1}{x}  \e^{-\frac{x^2}{2}}$, \ie
+\begin{equation*}
+A_n \sim 2 \frac{1}{\sqrt{2\pi}} \cdot \frac{\sigma_n}{\gamma} \e^{-\frac{\gamma^2}{\sigma_n^2}}= \sqrt{\frac{2}{\pi}}\cdot \frac{\sigma_n}{\gamma} \e^{-\frac{\gamma^2}{\sigma_n^2}}
+\end{equation*}
+\noindent
+which concludes the proof of the intermediary proposition.
 
+\noindent
+Substituting $\mopt$ by $p[f]$, $m_n$ by the posterior mean $\hat { p } _ { \mathrm { FWBQ } } [ f ]$ and $\sigma_n$ by the posterior standard deviation $M M D \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right)$ and using the results
+ from Theorem 1 show the second theorem.
 
 \section{Experimental Results}
 \label{sec:ER}
