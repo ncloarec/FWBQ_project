@@ -742,6 +742,82 @@ which allow us to conclude.
 \section{Contraction}
 \label{sec:contraction}
 
+We expose here the second theorem of \cite{FWBQ} which appears to us to be more
+ like a corollary of the previous theorem rather than a whole new result. In fact,
+ its proof requires very little effort compare to the precedent result.
+
+ \begin{boxtheorem}
+Let $S \subseteq \mathbb { R }$ be an open neighbourhood of the true integral
+$p[f]$ and let $\gamma = \inf _ { r \in S ^ { C } } | r - p [ f ] | > 0$.
+
+Then the posterior probability mass on $S ^ { c } = \mathbb { R } \backslash S$
+vanishes at a rate:
+\begin{equation}
+  \operatorname { prob } \left( S ^ { c } \right) \leq \left\{ \begin{array} { c c } { \frac { 2 \sqrt { 2 } D ^ { 2 } } { \sqrt { \pi } R \gamma } n ^ { - 1 } \exp \left( - \frac { \gamma ^ { 2 } R ^ { 2 } } { 8 D ^ { 4 } } n ^ { 2 } \right) } & { \text {}  } \\ { \frac { 2 D } { \sqrt { \pi \gamma } } \exp \left( - \frac { R ^ { 2 } } { 2 D ^ { 2 } } n - \frac { \gamma ^ { 2 } } { 2 D ^ { 2 } } \exp \left( \frac { R ^ { 2 } } { 2 D ^ { 2 } } n \right) \right) } & { \text {} } \end{array} \right.
+\end{equation}
+for FWBQ and FWLSBQ respectively with the same notations used in theorem 1.
+ \end{boxtheorem}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[dot/.style={circle,inner sep=1pt,fill,name=#1}]
+     \draw[-latex] (-2,0) coordinate (M) -- ++(6,0) node [right] {$\R$};
+     \node [dot=A, fill=red, label = $A$] at (-1,0) {};
+     % \node [dot=D, fill=red, label = $Y-\tau$] at (0,0) {};
+     \node [dot=B, fill=red, label = $B$] at (3,0) {};
+     \node [dot = C, fill=red, label =\text{p[f]}] at (1.5,0) {};
+     \draw [decorate,decoration={brace,amplitude=8pt, mirror},xshift=0pt,yshift=-2pt] (1.5,0) -- (3,0) node [black,midway,yshift=-.6cm] {\footnotesize $\gamma$ };
+     \draw (A) -- (B);
+     \draw [decorate,decoration={brace,amplitude=6pt, mirror},xshift=0pt,yshift=-2pt] (-2,0) -- (-1,0) node [black,midway,yshift=-.6cm] {\footnotesize $S^ { c }$ };
+     \draw [decorate,decoration={brace,amplitude=6pt, mirror},xshift=0pt,yshift=-2pt] (3,0) -- (4,0) node [black,midway,yshift=-.6cm] {\footnotesize $S^ { c }$ };
+    \end{tikzpicture}
+    \caption{$A := \argmax_{s\in S^ { c }}\acc{s \leq p[f]}$ and $B := \argmin_{s\in S^ { c }}\acc{s \geq p[f]}$ with extremums reached since $S^ { c }$ is closed.}
+    \label{fig:general}
+\end{figure}
+
+Let's show the following proposition :
+\begin{boxtheorem}
+Let $\acc{m_n}\subset \R$ and $\acc{\sigma_n}\subset\R_{+}^{*}$ such that :
+\begin{equation*}
+  \begin{cases}
+    m_n \rightarrow \mopt\\
+    \sigma_n \rightarrow 0  \\
+    \frac{\abs{m_n-\mopt}}{\sigma_n} = \O_{n\rightarrow \infty}\prt{1}
+\end{cases}
+\end{equation*}
+with $\mopt$ a real number. Let $S \subseteq \mathbb { R }$ be an open neighbourhood of
+$\mopt$, $\gamma = \inf _ { r \in S ^ { C } } | r - \mopt | > 0$ and denote by
+\begin{equation*}
+  M_n = \int_{S^c} \phi\prt{x |m_n, \sigma_n} \dx
+\end{equation*}
+the mass probability of a gaussian random variable on $S^c$ with mean $m_n$ and  variance $\sigma_n^2$. The following inequality holds :
+ \begin{equation}
+M_n \lesssim \left( \sqrt { 2 } \sigma _ { n } / \sqrt { \pi } \gamma \right) \exp \left( - \gamma ^ { 2 } / 2 \sigma _ { n } ^ { 2 } \right)
+ \end{equation}
+ where $\lesssim$ denotes an inequality which is true asymptotically.
+\end{boxtheorem}
+
+\noindent
+Since $$S^c \subseteq \intof{-\infty}{\mopt-\gamma} \cup \intfo{\mopt+\gamma}{+\infty}$$
+we have by monotony of integral:
+\begin{align*}
+  M_n &\leq \int_{-\infty}^{\mopt-\gamma}\phi\prt{x |m_n, \sigma_n} \dx
+  + \int_{\mopt+\gamma}^{+\infty}\phi\prt{x |m_n, \sigma_n} \dx\\
+  &\leq \underbrace{\Phi \left( \frac { \mopt - m _ { n } } { \sigma _ { n } } - \frac { \gamma } { \sigma _ { n } } \right)+ 1-\Phi \left( \frac { \mopt - m _ { n } } { \sigma _ { n } } + \frac { \gamma } { \sigma _ { n } } \right)}_{:=A_n}
+\end{align*}
+where $\Phi\prt{\cdot}$ denotes the cumulative distribution function of a standard normal distribution. Since $\frac { p [ f ] - m _ { n } } { \sigma _ { n }}$ is bounded
+ when $n$ goes to infinity and because $\Phi$ is continuous over $\R$ we have :
+\begin{align*}
+  A_n &\approx \Phi\prt{\frac{-\gamma}{\sigma_n}}+1-\Phi\prt{\frac{\gamma}{\sigma_n}}\\
+  &= 2\cdot \Phi\prt{\frac{\gamma}{\sigma_n}}.
+\end{align*}
+
+Now we need to find an equivalent of $\Phi(x)$ when $x$ goes to infinity. Lets show the following inequality :
+\begin{boxtheorem}
+For $x>0$
+\end{boxtheorem}
+
+
 
 \section{Experimental Results}
 \label{sec:ER}
