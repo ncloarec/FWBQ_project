@@ -867,7 +867,7 @@ The following graph is a plot of the bivariate kernel density estimate of the 20
 \begin{center}
 	\includegraphics[scale=0.25]{plot-simulation-kde.png}
 \end{center}
-We start with a smooth function $f$ that is the sum of 3 two-dimensional gaussians. Let us notice that the function $f$ intervenes at the end of our algorithms. In other words, we can change $f$ in order to obtain some other values of the integral without having to relaunch everything.
+We start with a smooth function $f$ that is the sum of 3 two-dimensional gaussians. Let us notice that the function $f$ intervenes at the end of our algorithm. In other words, we can change $f$ in order to obtain some other values of the integral without having to relaunch everything.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.25]{plot-simulation-3d-function.png}
@@ -890,7 +890,7 @@ It is interesting to visualize what is happening when the point are selected by 
 	\caption{\textbf{Convergence towards the mean element of FW algorithm (left) and the FWLS algorithm (right).}}
 \end{center}
 \end{figure}
-Adding the line-search allows for a much faster convergence towards the mean element. In no more than 25 points, the approximation of the mean element seems to perfectly match the analytically calcultated mean element. We conclude by saying the line-search (which choose the $\rho_{i}$) plays a crucial role in the algorithm.
+Adding the line-search allows for a much faster convergence towards the mean element. In no more than 50 points, the approximation of the mean element seems to perfectly match the analytically calcultated mean element. We conclude by saying the line-search (which choose the $\rho_{i}$) plays a crucial role in the algorithm.
 We can then compute the value of the integral with a $95\%$ confidence interval.
 \begin{figure}[H]
 \begin{center}
