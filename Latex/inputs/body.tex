@@ -446,7 +446,7 @@ Let's prove \eqref{eq:13} by induction.
 \end{boxcomputation}
 
 It is common to take harmonic coefficients in the standard FW algorithm\footnote{Let's remember that in the FWLS algorithm, $\acc{\rho_i}$ and thus $\acc{w_k^{FWLS}}$ are
-determind by the line search step.} as a choice for $\acc{\rho_i}:= \acc{\frac{1}{i}}_{i=1}^n$,
+determined by the line search step.} as a choice for $\acc{\rho_i}:= \acc{\frac{1}{i}}_{i=1}^n$,
  which gives us uniform weights as showed bellow :
  \begin{align*}
 w_k^{FW} &= \frac{1}{k} \acc{\prod_{k<i\leq n} \prt{1-\frac{1}{i}}}= \frac{1}{k} \cdot \frac{k}{n} = \frac{1}{n}.
