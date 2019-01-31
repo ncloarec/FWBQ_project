@@ -849,7 +849,7 @@ which concludes the proof of the intermediary proposition.
 Substituting $\mopt$ by $p[f]$, $m_n$ by the posterior mean $\hat { p } _ { \mathrm { FWBQ } } [ f ]$ and $\sigma_n$ by the posterior standard deviation $M M D \left( \left\{ x _ { i } , w _ { i } \right\} _ { i = 1 } ^ { n } \right)$ and using the results
  from Theorem 1 show the second theorem.
 
-\section{Experimental Results}
+\section{Experimental Results 1}
 \label{sec:ER}
 
 \subsection{Overview of the code}
@@ -865,7 +865,6 @@ The following graph is a plot of the bivariate kernel density estimate of the 20
 \begin{center}
 	\includegraphics[scale=0.25]{plot-simulation-kde.png}
 \end{center}
-\noindent
 We start with a smooth function $f$ that is the sum of 3 two-dimensional gaussians. Let us notice that the function $f$ intervenes at the end of our algorithms. In other words, we can change $f$ in order to obtain some other values of the integral without having to relaunch everything.
 \begin{figure}[H]
 \begin{center}
@@ -873,8 +872,7 @@ We start with a smooth function $f$ that is the sum of 3 two-dimensional gaussia
 	\caption{\textbf{KDE plot of the mixture of gaussians $p$.}}
 \end{center}
 \end{figure}
-\noindent
-The next figures shows the 50 selected points in the FWBQ (FW algorithm) and the FWLSQB (FWLS algorithm) algorithms.
+The next figures shows the 100 selected points in the FWBQ (FW algorithm) and the FWLSQB (FWLS algorithm) algorithms.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.20]{plot-simulation-selectedpoints-FWBQ.png}
@@ -882,8 +880,7 @@ The next figures shows the 50 selected points in the FWBQ (FW algorithm) and the
 	\caption{\textbf{Points selected by the FW (left) and FWLS (right) algorithm}}
 \end{center}
 \end{figure}
-\noindent
-It is interesting to visualize what is happening when the point are selected by the FW and the FWLS algorithm throughout the iterations.
+It is interesting to visualize what is happening when the point are selected by the FW and the FWLS algorithm throughout the iterations. What is important is how fast the mean element is reconstructed by carefully choosing the points and their weights.
 \begin{figure}[H]
 \begin{center}
 	\includegraphics[scale=0.30]{plot-simulation-3d-meanelement-FWBQ.png}
@@ -891,15 +888,14 @@ It is interesting to visualize what is happening when the point are selected by 
 	\caption{\textbf{Convergence towards the mean element of FW algorithm (left) and the FWLS algorithm (right).}}
 \end{center}
 \end{figure}
-\noindent
-Adding the line-search allows for a faster convergence towards the mean element. / comment more here /
+Adding the line-search allows for a much faster convergence towards the mean element. In no more than 25 points, the approximation of the mean element seems to perfectly match the analytically calcultated mean element. We conclude by saying the line-search (which choose the $rho_{i}$) plays a crucial role in the algorithm.
+We can then compute the value of the integral with a $95\%$ confidence interval.
 \begin{figure}[H]
 \begin{center}
-	\includegraphics[scale=0.25]{plot-mmdsquared-value-FWLSBQ.png}
-	\caption{\textbf{MMD$^2$ and the value of the integral.}}
+	\includegraphics[scale=0.25]{plot-simulation-mmdsquared-value-FWLSBQ.png}
+	\caption{\textbf{MMD$^2$ and the value of the integral for the FWLSBQ algorithm.}}
 \end{center}
 \end{figure}
-\noindent
 
 \subsection{An example of application}
 In this section we have implemented from real data the two algorithms FWBQ and FWLSBQ. In order to have a basis of comparison, we have also implemented on our data the Monte Carlo integration. The data used represents the closing price of the shares of Apple, Facebook, Google and Microsoft of 2018. We compute the return of each stock. The return represents the design points of our theory. \\ \\
